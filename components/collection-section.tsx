@@ -38,7 +38,7 @@ export function CollectionSection() {
           {collections.map((collection) => (
             <Link
               key={collection.title}
-              href={`/products/${collection.slug}`}
+              href={`/products/category/${collection.slug}`}
               className="group relative aspect-[3/5] overflow-hidden"
             >
               {/* Background image */}
@@ -58,7 +58,7 @@ export function CollectionSection() {
         {/* View all button */}
         <div className="mt-8 md:mt-12 flex justify-center">
           <Link
-            href="/products/all"
+            href="/products/category/all"
             className="group inline-flex items-center gap-3 text-amber-700 text-sm md:text-base tracking-wider uppercase hover:text-amber-800 transition-colors"
           >
             VIEW ALL COLLECTIONS

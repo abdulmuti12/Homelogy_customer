@@ -189,7 +189,7 @@ export default function ProductDetailPage() {
             <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-12">You may also like</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
-                <Link key={relatedProduct.id} href={`/products/${relatedProduct.id}`} className="group cursor-pointer">
+                <Link key={relatedProduct.id} href={`/products/item/${relatedProduct.id}`} className="group cursor-pointer">
                   <div className="bg-white rounded-lg overflow-hidden mb-3 shadow-md transition-transform duration-300 group-hover:scale-105">
                     <img
                       src={relatedProduct.image || "/placeholder.svg"}

@@ -244,7 +244,7 @@ export default function CategoryPage() {
             <>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
                 {paginatedProducts.map((product) => (
-                  <Link key={product.id} href={`/products/${product.id}`} className="cursor-pointer group">
+                  <Link key={product.id} href={`/products/item/${product.id}`} className="cursor-pointer group">
                     {/* Product Image */}
                     <div className="bg-white rounded-lg overflow-hidden mb-3 transition-transform duration-300 group-hover:scale-105">
                       <img
@@ -311,7 +311,7 @@ export default function CategoryPage() {
             {collections.map((collection) => (
               <Link
                 key={collection.title}
-                href={`/products/${collection.title.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/products/category/${collection.title.toLowerCase().replace(/\s+/g, "-")}`}
                 className="group relative aspect-[3/5] overflow-hidden"
               >
                 <div
