@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { FooterSection } from "@/components/footer-section"
@@ -16,21 +16,127 @@ import {
 } from "@/components/ui/breadcrumb"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react"
-import { products, collections } from "@/lib/products"
+import { collections } from "@/lib/products"
 import { ArrowRight } from "lucide-react"
+
+interface Product {
+  id: number
+  name: string
+  category: string
+  product_type: string | null
+  brand: string
+  image1: string
+}
+
+interface ApiResponse {
+  success: boolean
+  message: string
+  data: {
+    data: Product[]
+    current_page: number
+    last_page: number
+    per_page: number
+    total: number
+  }
+  status: number
+}
+
+interface Category {
+  id: number
+  name: string
+}
+
+interface CategoryResponse {
+  success: boolean
+  message: string
+  data: Category[]
+  status: number
+}
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedColor, setSelectedColor] = useState("All")
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 12
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [totalPages, setTotalPages] = useState(1)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [categoriesLoading, setCategoriesLoading] = useState(true)
 
-  const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Fetch categories from API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setCategoriesLoading(true)
+        const response = await fetch("http://127.0.0.1:8000/api/part-category")
+        const json: CategoryResponse = await response.json()
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const paginatedProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage)
+        if (json.success && json.data && Array.isArray(json.data)) {
+          setCategories(json.data)
+        } else {
+          console.log("[v0] Failed to load categories:", json.message)
+          setCategories([])
+        }
+      } catch (err) {
+        console.log("[v0] Category API Error:", err)
+        setCategories([])
+      } finally {
+        setCategoriesLoading(false)
+      }
+    }
+
+    fetchCategories()
+  }, [])
+
+  // Fetch products from API with category filter
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true)
+        
+        // Build query params
+        let url = `http://31.97.67.48:8000/api/customers/product?page=${currentPage}`
+        
+        // Add category filter if selected
+        if (selectedCategory !== "All") {
+          url += `&category=${encodeURIComponent(selectedCategory)}`
+        }
+        
+        console.log("[v0] Fetching products with URL:", url)
+        const response = await fetch(url)
+        const json: ApiResponse = await response.json()
+
+        if (json.success && json.data && json.data.data) {
+          setProducts(json.data.data)
+          setTotalPages(json.data.last_page)
+          setError(null)
+        } else {
+          setError(json.message || "Failed to load products")
+          setProducts([])
+        }
+      } catch (err) {
+        console.log("[v0] API Error:", err)
+        setError("Failed to connect to server")
+        setProducts([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [currentPage, selectedCategory])
+
+  // Reset to page 1 when category changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedCategory])
+
+  // API already returns paginated data, use it directly
+  const paginatedProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <main className="min-h-screen relative">
@@ -117,10 +223,20 @@ export default function ProductsPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem onClick={() => setSelectedCategory("All")}>All</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedCategory("2 Seater")}>2 Seater</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedCategory("3 Seater")}>3 Seater</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedCategory("L Shape")}>L Shape</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedCategory("U Shape")}>U Shape</DropdownMenuItem>
+                      {categoriesLoading ? (
+                        <DropdownMenuItem disabled>Loading...</DropdownMenuItem>
+                      ) : categories.length > 0 ? (
+                        categories.map((category) => (
+                          <DropdownMenuItem
+                            key={category.id}
+                            onClick={() => setSelectedCategory(category.name)}
+                          >
+                            {category.name}
+                          </DropdownMenuItem>
+                        ))
+                      ) : (
+                        <DropdownMenuItem disabled>No categories available</DropdownMenuItem>
+                      )}
                     </DropdownMenuContent>
                   </DropdownMenu>
 
@@ -141,54 +257,132 @@ export default function ProductsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-                {paginatedProducts.map((product) => (
-                  <Link key={product.id} href={`/products/item/${product.id}`} className="cursor-pointer group">
-                    <div className="bg-white rounded-lg overflow-hidden mb-3 transition-transform duration-300 group-hover:scale-105">
-                      <img
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.name}
-                        className="w-full aspect-square object-cover"
-                      />
+              {loading ? (
+                <div className="flex justify-center items-center py-16">
+                  <p className="text-gray-500">Loading products...</p>
+                </div>
+              ) : error ? (
+                <div className="flex justify-center items-center py-16">
+                  <div className="text-center">
+                    <p className="text-red-500 mb-2">{error}</p>
+                    <p className="text-gray-500 text-sm">Please try again later</p>
+                  </div>
+                </div>
+              ) : paginatedProducts.length === 0 ? (
+                <div className="flex justify-center items-center py-16">
+                  <p className="text-gray-500">No products found</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+                  {paginatedProducts.map((product) => (
+                    <div key={product.id} className="cursor-pointer group">
+                      <div className="bg-white rounded-lg overflow-hidden mb-3 transition-transform duration-300 group-hover:scale-105">
+                        <img
+                          src={product.image1 || "/placeholder.svg"}
+                          alt={product.name}
+                          className="w-full aspect-square object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder.svg"
+                          }}
+                        />
+                      </div>
+
+                      <div className="text-center">
+                        <h3 className="text-gray-900 font-medium text-sm md:text-base">{product.name}</h3>
+                        <p className="text-gray-600 text-xs md:text-sm">
+                          {product.category}
+                        </p>
+                      </div>
                     </div>
+                  ))}
+                </div>
+              )}
 
-                    <div className="text-center">
-                      <h3 className="text-gray-900 font-medium text-sm md:text-base">{product.name}</h3>
-                      <p className="text-gray-600 text-xs md:text-sm">{product.type}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-center gap-2">
-                <button
-                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
-                  className="px-3 py-2 text-sm text-gray-700 hover:text-gray-900 disabled:opacity-50"
-                >
-                  {"< Previous"}
-                </button>
-
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              {!loading && !error && products.length > 0 && totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 flex-wrap">
                   <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={`px-3 py-2 text-sm rounded ${
-                      currentPage === page ? "bg-gray-900 text-white" : "text-gray-700 hover:text-gray-900"
-                    }`}
+                    onClick={() => {
+                      setCurrentPage(Math.max(1, currentPage - 1))
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {page}
+                    {"< Previous"}
                   </button>
-                ))}
 
-                <button
-                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                  disabled={currentPage === totalPages}
-                  className="px-3 py-2 text-sm text-gray-700 hover:text-gray-900 disabled:opacity-50"
-                >
-                  {"Next >"}
-                </button>
-              </div>
+                  {/* Smart pagination logic */}
+                  {(() => {
+                    const pages: (number | string)[] = []
+                    
+                    // Always show page 1
+                    pages.push(1)
+                    
+                    if (currentPage <= 5) {
+                      // If current page is in first 5, show pages 1-5
+                      for (let i = 2; i <= Math.min(5, totalPages); i++) {
+                        pages.push(i)
+                      }
+                      // Add ellipsis and last page if there are more than 5 pages
+                      if (totalPages > 5) {
+                        pages.push('...')
+                        pages.push(totalPages)
+                      }
+                    } else if (currentPage > totalPages - 4) {
+                      // If current page is in last 5, show ellipsis and last 5 pages
+                      pages.push('...')
+                      for (let i = Math.max(2, totalPages - 4); i <= totalPages; i++) {
+                        pages.push(i)
+                      }
+                    } else {
+                      // Otherwise, show ellipsis, current page and neighbors, ellipsis, and last page
+                      pages.push('...')
+                      pages.push(currentPage - 1)
+                      pages.push(currentPage)
+                      pages.push(currentPage + 1)
+                      pages.push('...')
+                      pages.push(totalPages)
+                    }
+                    
+                    return pages.map((page, idx) => {
+                      if (page === '...') {
+                        return (
+                          <span key={`ellipsis-${idx}`} className="text-gray-500">
+                            ...
+                          </span>
+                        )
+                      }
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => {
+                            setCurrentPage(page as number)
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                          }}
+                          className={`px-3 py-2 text-sm rounded ${
+                            currentPage === page
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-700 hover:text-gray-900"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )
+                    })
+                  })()}
+
+                  <button
+                    onClick={() => {
+                      setCurrentPage(Math.min(totalPages, currentPage + 1))
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {"Next >"}
+                  </button>
+                </div>
+              )}
             </div>
           </section>
         </div>
