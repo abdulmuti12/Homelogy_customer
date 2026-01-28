@@ -90,41 +90,41 @@ export function SiteHeader() {
           {/* Compact dropdown menu */}
           <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm z-40 shadow-lg">
             <nav className="flex flex-col px-8 py-6">
-              <a
-                href="about"
+              <Link
+                href="/about"
                 className="text-white text-lg py-3 border-b border-white/10 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About us
-              </a>
-              <a
-                href="projects"
+              </Link>
+              <Link
+                href="/projects"
                 className="text-white text-lg py-3 border-b border-white/10 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Projects
-              </a>
-              <a
-                href="products"
+              </Link>
+              <Link
+                href="/products"
                 className="text-white text-lg py-3 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Product
-              </a>
-              <a
-                href="catalogue"
+              </Link>
+              <Link
+                href="/catalogue"
                 className="text-white text-lg py-3 border-b border-white/10 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Catalogue
-              </a>
-              <a
-                href="contact"
+              </Link>
+              <Link
+                href="/contact"
                 className="text-white text-lg py-3 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
-              </a>
+              </Link>
             </nav>
           </div>
         </>

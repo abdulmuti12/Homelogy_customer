@@ -163,22 +163,12 @@ export default function ProductDetailPage() {
 
               {/* Quantity and Add to Cart */}
               <div className="flex items-center gap-4">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 border border-gray-400 rounded flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  −
-                </button>
-                <span className="text-gray-900 font-medium w-12 text-center">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 border border-gray-400 rounded flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  +
-                </button>
+                 <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+                  Get Contact
+                </Button>
 
                 <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
-                  ADD TO CART
+                  Visit Website
                 </Button>
               </div>
             </div>
