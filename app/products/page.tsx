@@ -19,6 +19,30 @@ import { ChevronDown } from "lucide-react"
 import { collections } from "@/lib/products"
 import { ArrowRight } from "lucide-react"
 
+const COLOR_OPTIONS = [
+  "Red",
+  "Green",
+  "Blue",
+  "Yellow",
+  "Cyan",
+  "Magenta",
+  "Black",
+  "White",
+  "Gray",
+  "Orange",
+  "Purple",
+  "Pink",
+  "Brown",
+  "Lime",
+  "Olive",
+  "Teal",
+  "Navy",
+  "Maroon",
+  "Silver",
+  "Gold",
+  "Beige",
+]
+
 interface Product {
   id: number
   name: string
@@ -90,7 +114,7 @@ export default function ProductsPage() {
     fetchCategories()
   }, [])
 
-  // Fetch products from API with category filter
+  // Fetch products from API with category, color, and search filters
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -99,9 +123,19 @@ export default function ProductsPage() {
         // Build query params
         let url = `http://31.97.67.48:8000/api/customers/product?page=${currentPage}`
         
+        // Add search parameter if entered
+        if (searchTerm) {
+          url += `&name=${encodeURIComponent(searchTerm)}`
+        }
+        
         // Add category filter if selected
         if (selectedCategory !== "All") {
           url += `&category=${encodeURIComponent(selectedCategory)}`
+        }
+        
+        // Add color filter if selected
+        if (selectedColor !== "All") {
+          url += `&color=${encodeURIComponent(selectedColor)}`
         }
         
         console.log("[v0] Fetching products with URL:", url)
@@ -126,17 +160,15 @@ export default function ProductsPage() {
     }
 
     fetchProducts()
-  }, [currentPage, selectedCategory])
+  }, [currentPage, selectedCategory, selectedColor, searchTerm])
 
-  // Reset to page 1 when category changes
+  // Reset to page 1 when category, color, or search changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [selectedCategory])
+  }, [selectedCategory, selectedColor, searchTerm])
 
-  // API already returns paginated data, use it directly
-  const paginatedProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // API already returns filtered data, use it directly
+  const paginatedProducts = products
 
   return (
     <main className="min-h-screen relative">
@@ -206,11 +238,16 @@ export default function ProductsPage() {
                         <ChevronDown size={16} />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
+                    <DropdownMenuContent className="max-h-64 overflow-y-auto">
                       <DropdownMenuItem onClick={() => setSelectedColor("All")}>All</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedColor("Brown")}>Brown</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedColor("Gray")}>Gray</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSelectedColor("Black")}>Black</DropdownMenuItem>
+                      {COLOR_OPTIONS.map((color) => (
+                        <DropdownMenuItem
+                          key={color}
+                          onClick={() => setSelectedColor(color)}
+                        >
+                          {color}
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
 
@@ -290,7 +327,7 @@ export default function ProductsPage() {
                       <div className="text-center">
                         <h3 className="text-gray-900 font-medium text-sm md:text-base">{product.name}</h3>
                         <p className="text-gray-600 text-xs md:text-sm">
-                          {product.category}
+                          {product.product_type || product.category}
                         </p>
                       </div>
                     </div>
