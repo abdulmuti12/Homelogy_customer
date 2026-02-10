@@ -312,7 +312,11 @@ export default function ProductsPage() {
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
                   {paginatedProducts.map((product) => (
-                    <div key={product.id} className="cursor-pointer group">
+                    <Link
+                      key={product.id}
+                      href={`/products/item/${product.id}`}
+                      className="cursor-pointer group"
+                    >
                       <div className="bg-white rounded-lg overflow-hidden mb-3 transition-transform duration-300 group-hover:scale-105">
                         <img
                           src={product.image1 || "/placeholder.svg"}
@@ -330,7 +334,7 @@ export default function ProductsPage() {
                           {product.product_type || product.category}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}

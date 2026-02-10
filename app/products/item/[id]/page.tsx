@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
@@ -15,24 +15,98 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
-import { getProductById, getRelatedProducts } from "@/lib/products"
+
+interface ProductData {
+  id: number
+  name: string
+  category: string
+  description: string
+  size: string
+  color: string
+  image1: string
+  image2: string
+  image3: string
+  image4: string
+  image5: string
+  image6: string
+  brand: string
+  recomended_products: Array<{
+    id: number
+    name: string
+    image1: string
+    brand: string
+  }>
+}
+
+interface ApiResponse {
+  success: boolean
+  message: string
+  data: {
+    general: ProductData
+  }
+  status: number
+}
 
 export default function ProductDetailPage() {
   const params = useParams()
-  const productId = Number(params.id)
-  const product = getProductById(productId)
-  const relatedProducts = getRelatedProducts(productId)
-
+  const productId = params.id
+  
+  const [product, setProduct] = useState<ProductData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  const [quantity, setQuantity] = useState(1)
+  const [relatedProducts, setRelatedProducts] = useState<ProductData["recomended_products"]>([])
 
-  if (!product) {
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/product/${productId}`)
+        const json: ApiResponse = await response.json()
+
+        console.log("[v0] Product API Response:", json)
+
+        if (json.success && json.data?.general) {
+          setProduct(json.data.general)
+          setRelatedProducts(json.data.general.recomended_products)
+          setError(null)
+        } else {
+          setError(json.message || "Failed to load product details")
+          setProduct(null)
+        }
+      } catch (err) {
+        console.log("[v0] Product API Error:", err)
+        setError("Failed to connect to server")
+        setProduct(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (productId) {
+      fetchProduct()
+    }
+  }, [productId])
+
+  if (loading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 to-stone-100">
+        <SiteHeader />
+        <div className="text-center px-6">
+          <p className="text-gray-600 text-lg">Loading product...</p>
+        </div>
+        <WhatsAppButton />
+      </main>
+    )
+  }
+
+  if (error || !product) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 to-stone-100">
         <SiteHeader />
         <div className="text-center px-6">
           <h1 className="text-4xl md:text-5xl font-serif text-gray-900 mb-4">Product Not Found</h1>
-          <p className="text-gray-600 text-lg mb-8">The product you're looking for doesn't exist or has been removed.</p>
+          <p className="text-red-500 text-lg mb-4">{error || "The product you're looking for doesn't exist or has been removed."}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/products" 
@@ -102,31 +176,51 @@ export default function ProductDetailPage() {
               {/* Main Image */}
               <div className="bg-stone-300/50 rounded-lg overflow-hidden shadow-lg aspect-[4/3]">
                 <img
-                  src={product.gallery?.[selectedImageIndex] || product.image || "/placeholder.svg"}
+                  src={
+                    selectedImageIndex === 0
+                      ? product.image1
+                      : selectedImageIndex === 1
+                        ? product.image2
+                        : selectedImageIndex === 2
+                          ? product.image3
+                          : selectedImageIndex === 3
+                            ? product.image4
+                            : selectedImageIndex === 4
+                              ? product.image5
+                              : product.image6
+                  }
                   alt={product.name}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder.svg"
+                  }}
                 />
               </div>
 
               {/* Thumbnail Images */}
               <div className="flex gap-3 justify-center">
-                {(product.gallery || [product.image]).map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImageIndex(index)}
-                    className={`relative w-16 h-16 md:w-20 md:h-20 rounded overflow-hidden border-2 transition-all ${
-                      selectedImageIndex === index
-                        ? "border-gray-900 scale-105"
-                        : "border-gray-300 hover:border-gray-500"
-                    }`}
-                  >
-                    <img
-                      src={image || "/placeholder.svg"}
-                      alt={`${product.name} view ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+                {[product.image1, product.image2, product.image3, product.image4, product.image5, product.image6].map(
+                  (image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`relative w-16 h-16 md:w-20 md:h-20 rounded overflow-hidden border-2 transition-all ${
+                        selectedImageIndex === index
+                          ? "border-gray-900 scale-105"
+                          : "border-gray-300 hover:border-gray-500"
+                      }`}
+                    >
+                      <img
+                        src={image || "/placeholder.svg"}
+                        alt={`${product.name} view ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder.svg"
+                        }}
+                      />
+                    </button>
+                  )
+                )}
               </div>
             </div>
 
@@ -134,7 +228,7 @@ export default function ProductDetailPage() {
             <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 lg:p-16">
               {/* Product Name */}
               <h1 className="font-serif text-5xl md:text-6xl text-gray-900 mb-2">{product.name}</h1>
-              <p className="text-gray-600 text-lg mb-8">{product.type}</p>
+              <p className="text-gray-600 text-lg mb-8">{product.brand}</p>
 
               {/* Product Description */}
               <p className="text-gray-700 text-sm leading-relaxed mb-12 text-justify">{product.description}</p>
@@ -149,9 +243,9 @@ export default function ProductDetailPage() {
                     <span className="text-gray-700 text-sm ml-4">{product.category}</span>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-gray-700 text-sm w-32">Material</span>
+                    <span className="text-gray-700 text-sm w-32">Color</span>
                     <span className="text-gray-700 text-sm">:</span>
-                    <span className="text-gray-700 text-sm ml-4">{product.material}</span>
+                    <span className="text-gray-700 text-sm ml-4">{product.color}</span>
                   </div>
                   <div className="flex items-start">
                     <span className="text-gray-700 text-sm w-32">Size</span>
@@ -163,7 +257,7 @@ export default function ProductDetailPage() {
 
               {/* Quantity and Add to Cart */}
               <div className="flex items-center gap-4">
-                 <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+                <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
                   Get Contact
                 </Button>
 
@@ -175,26 +269,35 @@ export default function ProductDetailPage() {
           </div>
 
           {/* You May Also Like Section */}
-          <div>
-            <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-12">You may also like</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {relatedProducts.map((relatedProduct) => (
-                <Link key={relatedProduct.id} href={`/products/item/${relatedProduct.id}`} className="group cursor-pointer">
-                  <div className="bg-white rounded-lg overflow-hidden mb-3 shadow-md transition-transform duration-300 group-hover:scale-105">
-                    <img
-                      src={relatedProduct.image || "/placeholder.svg"}
-                      alt={relatedProduct.name}
-                      className="w-full aspect-square object-cover"
-                    />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-gray-900 font-medium text-sm md:text-base">{relatedProduct.name}</h3>
-                    <p className="text-gray-600 text-xs md:text-sm">{relatedProduct.type}</p>
-                  </div>
-                </Link>
-              ))}
+          {product.recomended_products && product.recomended_products.length > 0 && (
+            <div>
+              <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-12">You may also like</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {product.recomended_products.map((relatedProduct) => (
+                  <Link
+                    key={relatedProduct.id}
+                    href={`/products/item/${relatedProduct.id}`}
+                    className="group cursor-pointer"
+                  >
+                    <div className="bg-white rounded-lg overflow-hidden mb-3 shadow-md transition-transform duration-300 group-hover:scale-105">
+                      <img
+                        src={relatedProduct.image1 || "/placeholder.svg"}
+                        alt={relatedProduct.name}
+                        className="w-full aspect-square object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder.svg"
+                        }}
+                      />
+                    </div>
+                    <div className="text-center">
+                      <h3 className="text-gray-900 font-medium text-sm md:text-base">{relatedProduct.name}</h3>
+                      <p className="text-gray-600 text-xs md:text-sm">{relatedProduct.brand}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
