@@ -8,22 +8,22 @@ const slides = [
   {
     image: "/images/slide-1.png",
     title: "Furniture with",
-    subtitle: "Living Philosophy",
+    subtitle: "",
     description: "",
   },
   {
     image: "/images/Home_Slide_2.jpg",
     title: "",
-    subtitle: "Sofa",
+    subtitle: " ",
     description: "-",
-    tag: "Milan Design Week 2025",
+    tag: "",
   },
   {
     image: "/images/Home_Slide_3.jpg",
-    title: "Casa e",
+    title: "",
     subtitle: "-",
     description: "-",
-    tag: "Private Dinner with Lago",
+    tag: "",
   },
   {
     image: "/images/Home_Slide_4.jpeg",

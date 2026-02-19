@@ -30,6 +30,7 @@ interface ProductData {
   image5: string
   image6: string
   brand: string
+  link?: string
   recomended_products: Array<{
     id: number
     name: string
@@ -256,14 +257,26 @@ export default function ProductDetailPage() {
               </div>
 
               {/* Quantity and Add to Cart */}
-              <div className="flex items-center gap-4">
-                <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+              <div className="flex flex-col gap-3">
+                <a
+                  href={`https://wa.me/6285174189869?text=Saya%20tertarik%20dengan%20produk%3A%20${encodeURIComponent(product.name)}%0A%0ALink%20produk%3A%20${encodeURIComponent(`${typeof window !== 'undefined' ? window.location.origin : ''}/products/item/${productId}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors rounded flex items-center justify-center font-medium"
+                >
                   Get Contact
-                </Button>
+                </a>
 
-                <Button className="flex-1 h-10 bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
-                  Visit Website
-                </Button>
+                {product.link && (
+                  <a
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-10 bg-amber-900 text-white border border-amber-900 hover:bg-amber-800 hover:border-amber-800 transition-colors rounded flex items-center justify-center font-medium"
+                  >
+                    Visit Website
+                  </a>
+                )}
               </div>
             </div>
           </div>
