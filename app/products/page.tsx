@@ -73,9 +73,10 @@ export default function ProductsPage() {
 
                 <div className="lg:w-2/3 flex flex-col justify-start">
                   <p className="text-gray-700 text-sm leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                   The Homelogy Style collection presents a selection of furniture designed for refined contemporary living.
+                   Each product is defined by precise craftsmanship, carefully selected materials, and a distinctive design language. 
+                   From statement seating to elegant tables and accent pieces, the collection reflects a commitment to quality and design integrity.
+                   Homelogy Style furniture brings character, elegance, and presence into modern interiors, shaping spaces that reflect a cultivated lifestyle.
                   </p>
                 </div>
               </div>
