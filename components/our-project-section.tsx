@@ -54,8 +54,10 @@ export function OurProjectSection() {
         >
           <h2 className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6">Our Project</h2>
           <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-            dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+           Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
+          Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space. Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
+          Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
+
           </p>
         </motion.div>
 
