@@ -50,12 +50,16 @@ export function AboutSection() {
               viewport={{ once: true, amount: 0.3 }}
             >
               <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat.
+                Homelogy Style is a furniture brand defined by refined design and material excellence.
+                Each collection is developed with a focus on proportion, form, and craftsmanship, creating pieces that bring presence 
+                and elegance into contemporary interiors
               </p>
 
               <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed">
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex
+                Rooted in a design philosophy that values detail and material expression, Homelogy Style presents furniture that complements 
+                sophisticated living environments. Every piece reflects a commitment to quality, thoughtful design, and enduring aesthetics.
+                Through its collections, Homelogy Style offers furniture that shapes spaces with character, refinement, and a distinctive 
+                design identity.
               </p>
             </motion.div>
 
