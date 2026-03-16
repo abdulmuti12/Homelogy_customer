@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState, MouseEvent } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
+import { SiteHeader } from '@/components/site-header'
+import { FooterSection } from '@/components/footer-section'
 import {
   ChevronRight,
   ChevronLeft,
@@ -327,7 +327,7 @@ export default function CreatorDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#020817] text-white font-sans">
-      <Header />
+      <SiteHeader />
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 pt-6 pb-20">
         {/* Breadcrumb */}
@@ -714,7 +714,7 @@ export default function CreatorDetailPage() {
         </div>
       </div>
 
-      <Footer />
+      <FooterSection />
     </div>
   )
 }
