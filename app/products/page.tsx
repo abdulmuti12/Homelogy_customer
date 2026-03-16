@@ -94,7 +94,7 @@ export default function ProductsPage() {
     const fetchCategories = async () => {
       try {
         setCategoriesLoading(true)
-        const response = await fetch("http://127.0.0.1:8000/api/part-category")
+        const response = await fetch("https://casaitalia-living.com/api/part-category")
         const json: CategoryResponse = await response.json()
 
         if (json.success && json.data && Array.isArray(json.data)) {
@@ -121,7 +121,7 @@ export default function ProductsPage() {
         setLoading(true)
         
         // Build query params
-        let url = `http://31.97.67.48:8000/api/customers/product?page=${currentPage}`
+        let url = `https://casaitalia-living.com/api/customers/product?page=${currentPage}`
         
         // Add search parameter if entered
         if (searchTerm) {
