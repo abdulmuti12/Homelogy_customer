@@ -7,115 +7,103 @@ import { FooterSection } from "@/components/footer-section"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-// Extended project data with detailed information and gallery images
-const projectsData = [
-  {
-    id: 1,
-    title: "PI House",
-    architect: "Kithengono",
-    location: "Pantai Mutiara - North Jakarta",
-    year: 2024,
-    photo: "Photographer Name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/luxury-living-room.jpg",
-    galleryImages: ["/luxury-living-room.jpg", "/modern-interior-design.jpg", "/contemporary-living-space.jpg"],
-  },
-  {
-    id: 2,
-    title: "PM House",
-    architect: "Design Studio",
-    location: "Pondok Indah - South Jakarta",
-    year: 2024,
-    photo: "Professional Photographer",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/modern-interior-design.jpg",
-    galleryImages: ["/modern-interior-design.jpg", "/luxury-living-room.jpg", "/contemporary-living-space.jpg"],
-  },
-  {
-    id: 3,
-    title: "PIK Project",
-    architect: "Archi Team",
-    location: "Pantai Indah Kapuk - North Jakarta",
-    year: 2023,
-    photo: "Studio Photographer",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/contemporary-living-space.jpg",
-    galleryImages: ["/contemporary-living-space.jpg", "/luxury-living-room.jpg", "/modern-interior-design.jpg"],
-  },
-  {
-    id: 4,
-    title: "Rimau Office",
-    architect: "Corporate Architects",
-    location: "Kuningan - Central Jakarta",
-    year: 2024,
-    photo: "Commercial Photographer",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/modern-office-space.jpg",
-    galleryImages: ["/modern-office-space.jpg", "/corporate-office-interior.jpg", "/elegant-dining-room.jpg"],
-  },
-  {
-    id: 5,
-    title: "HNI OFFICE",
-    architect: "Office Design Specialists",
-    location: "Mega Kuningan - Central Jakarta",
-    year: 2023,
-    photo: "Interior Photographer",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/corporate-office-interior.jpg",
-    galleryImages: ["/corporate-office-interior.jpg", "/modern-office-space.jpg", "/elegant-dining-room.jpg"],
-  },
-  {
-    id: 6,
-    title: "MIRROR MIRROR",
-    architect: "Design Collective",
-    location: "Senayan - South Jakarta",
-    year: 2024,
-    photo: "Professional Photographer",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zrril delerit augue duis dolore te feugait nulla",
-    mainImage: "/elegant-dining-room.jpg",
-    galleryImages: ["/elegant-dining-room.jpg", "/luxury-living-room.jpg", "/contemporary-living-space.jpg"],
-  },
-]
+interface ProjectData {
+  id: number
+  name: string
+  architect: string
+  location: string
+  project_time: string
+  photo_created: string
+  description: string
+  file: string
+  file2: string
+  file3: string
+  file4: string
+  designer: string
+  note: string
+}
+
+interface ApiResponse {
+  success: boolean
+  message: string
+  data: {
+    general: ProjectData
+  }
+}
 
 export default function ProjectDetailPage() {
   const params = useParams()
   const router = useRouter()
-  const projectId = Number.parseInt(params.id as string)
+  const projectId = params.id as string
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [project, setProject] = useState<(typeof projectsData)[0] | null>(null)
+  const [project, setProject] = useState<ProjectData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const foundProject = projectsData.find((p) => p.id === projectId)
-    setProject(foundProject || null)
+    const fetchProject = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/project/${projectId}`)
+        const json: ApiResponse = await response.json()
+
+        console.log("[v0] Project Detail API Response:", json)
+
+        if (json.success && json.data?.general) {
+          setProject(json.data.general)
+          setError(null)
+        } else {
+          setError(json.message || "Failed to load project details")
+          setProject(null)
+        }
+      } catch (err) {
+        console.log("[v0] Project Detail API Error:", err)
+        setError("Failed to connect to server")
+        setProject(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (projectId) {
+      fetchProject()
+    }
   }, [projectId])
 
-  if (!project) {
+  if (loading) {
     return (
       <main className="min-h-screen bg-gray-100">
         <SiteHeader />
         <div className="flex items-center justify-center h-96">
-          <p className="text-gray-600">Project not found</p>
+          <p className="text-gray-600">Loading project...</p>
         </div>
       </main>
     )
   }
 
+  if (error || !project) {
+    return (
+      <main className="min-h-screen bg-gray-100">
+        <SiteHeader />
+        <div className="flex items-center justify-center h-96">
+          <p className="text-red-500">{error || "Project not found"}</p>
+        </div>
+      </main>
+    )
+  }
+
+  const galleryImages = [project.file, project.file2, project.file3, project.file4].filter(Boolean)
+
   const handlePreviousImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? project.galleryImages.length - 1 : prev - 1))
+    setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))
   }
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === project.galleryImages.length - 1 ? 0 : prev + 1))
+    setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))
   }
 
-  const currentImage = project.galleryImages[currentImageIndex]
+  const currentImage = galleryImages[currentImageIndex] || "/placeholder.svg"
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -139,10 +127,8 @@ export default function ProjectDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* Left: Project Info */}
             <div className="flex flex-col justify-start">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-8 font-serif">
-                <span className="text-amber-700">&lt;</span>
-                {project.title}
-                <span className="text-amber-700">&gt;</span>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8 font-serif">
+                {project.name}
               </h1>
 
               {/* Project Details */}
@@ -157,11 +143,11 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="flex gap-6">
                   <span className="text-gray-600 font-light">Year</span>
-                  <span className="text-gray-900">: {project.year}</span>
+                  <span className="text-gray-900">: {project.project_time}</span>
                 </div>
                 <div className="flex gap-6">
                   <span className="text-gray-600 font-light">Photo</span>
-                  <span className="text-gray-900">: {project.photo}</span>
+                  <span className="text-gray-900">: {project.photo_created}</span>
                 </div>
               </div>
 
@@ -200,23 +186,28 @@ export default function ProjectDetailPage() {
           </div>
 
           {/* Gallery Thumbnails */}
-          <div className="grid grid-cols-3 gap-6">
-            {project.galleryImages.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`relative w-full aspect-square rounded-lg overflow-hidden transition-all ${
-                  index === currentImageIndex ? "ring-2 ring-amber-700" : "hover:opacity-80"
-                }`}
-              >
-                <img
-                  src={image || "/placeholder.svg"}
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
+          {galleryImages.length > 0 && (
+            <div className="grid grid-cols-3 gap-6">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`relative w-full aspect-square rounded-lg overflow-hidden transition-all ${
+                    index === currentImageIndex ? "ring-2 ring-amber-700" : "hover:opacity-80"
+                  }`}
+                >
+                  <img
+                    src={image || "/placeholder.svg"}
+                    alt={`Gallery ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = "/placeholder.svg"
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

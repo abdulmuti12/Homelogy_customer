@@ -18,18 +18,21 @@ const catalogItems = [
     title: "Homelogy Catalog 2025",
     image: "/images/hm-cat-2025.png",
     year: "2025",
+    link: "https://drive.google.com/file/d/1bqOreYhWayqRCkt2zvRKoYsnjHW6pKNd/view",
   },
   {
     id: 2,
     title: "Homelogy Catalog 2024",
     image: "/images/HM-Cat-2024-new.png",
     year: "2024",
+    link: "",
   },
   {
     id: 3,
     title: "Homelogy Catalog 2023",
     image: "/images/HM-Cat-2023.png",
     year: "2023",
+    link: "",
   },
 ]
 
@@ -83,16 +86,31 @@ export default function CataloguePage() {
               <div key={item.id} className="flex flex-col items-center">
                 {/* Image Container with Fixed Aspect Ratio */}
                 <div className="w-full mb-6 group cursor-pointer h-full">
-                  <div className="relative aspect-[3/4] overflow-hidden transition-transform duration-500 group-hover:scale-[1.02] h-auto">
-                    <Image
-                      src={item.image || "/placeholder.svg"}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      priority={item.id === 1}
-                    />
-                  </div>
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                      <div className="relative aspect-[3/4] overflow-hidden transition-transform duration-500 group-hover:scale-[1.02] h-auto">
+                        <Image
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          priority={item.id === 1}
+                        />
+                      </div>
+                    </a>
+                  ) : (
+                    <div className="relative aspect-[3/4] overflow-hidden transition-transform duration-500 group-hover:scale-[1.02] h-auto">
+                      <Image
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        priority={item.id === 1}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Title Section */}

@@ -54,14 +54,12 @@ export function OurProjectSection() {
         >
           <h2 className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6">Our Project</h2>
           <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-           Homelogy Style is defined by the vision of Claudia Apriliana, Creative Director, and Ayleen Apriliana, Managing Director.Claudia
-           Apriliana shapes the creative direction of the brand, expressing a design language centered on refined forms, balanced proportions, and a deep 
-           sensitivity to materials.
-
-            Ayleen Apriliana oversees the strategic development of Homelogy Style, guiding the brand’s growth, partnerships, and operation
-            with clarityand precision.
-            Together, they shape Homelogy Style through a shared commitment to craftsmanship, design integrity, and a cultivated perspective on 
-            contemporary living.
+           Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
+           Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space. Through 
+           thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication 
+           and contemporary living.
+            
+           Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
           </p>
         </motion.div>
 
