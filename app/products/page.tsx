@@ -78,6 +78,7 @@ interface CategoryResponse {
 }
 
 export default function ProductsPage() {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedColor, setSelectedColor] = useState("All")
   const [selectedCategory, setSelectedCategory] = useState("All")
@@ -92,9 +93,16 @@ export default function ProductsPage() {
   // Fetch categories from API
   useEffect(() => {
     const fetchCategories = async () => {
+      if (!apiBaseUrl) {
+        console.log("[v0] NEXT_PUBLIC_API_URL is not configured")
+        setCategories([])
+        setCategoriesLoading(false)
+        return
+      }
+
       try {
         setCategoriesLoading(true)
-        const response = await fetch("https://casaitalia-living.com/api/part-category")
+        const response = await fetch(`${apiBaseUrl}/part-category`)
         const json: CategoryResponse = await response.json()
 
         if (json.success && json.data && Array.isArray(json.data)) {
@@ -112,16 +120,23 @@ export default function ProductsPage() {
     }
 
     fetchCategories()
-  }, [])
+  }, [apiBaseUrl])
 
   // Fetch products from API with category, color, and search filters
   useEffect(() => {
     const fetchProducts = async () => {
+      if (!apiBaseUrl) {
+        setError("API URL is not configured")
+        setProducts([])
+        setLoading(false)
+        return
+      }
+
       try {
         setLoading(true)
         
         // Build query params
-        let url = `https://casaitalia-living.com/api/customers/product?page=${currentPage}`
+        let url = `${apiBaseUrl}/customers/product?page=${currentPage}`
         
         // Add search parameter if entered
         if (searchTerm) {
@@ -160,7 +175,7 @@ export default function ProductsPage() {
     }
 
     fetchProducts()
-  }, [currentPage, selectedCategory, selectedColor, searchTerm])
+  }, [apiBaseUrl, currentPage, selectedCategory, selectedColor, searchTerm])
 
   // Reset to page 1 when category, color, or search changes
   useEffect(() => {
