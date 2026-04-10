@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -67,7 +68,15 @@ export function HeroSlider() {
           }`}
         >
           {/* Background Image */}
-          <div className="absolute inset-0 bg-cover bg-center transform-gpu" style={{ backgroundImage: `url(${slide.image})` }}>
+          <div className="absolute inset-0 transform-gpu">
+            <Image
+              src={slide.image || "/placeholder.svg"}
+              alt={slide.title || `Home slide ${index + 1}`}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
             <div className="absolute inset-0 bg-black/20" />
           </div>
 

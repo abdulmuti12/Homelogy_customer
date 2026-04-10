@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { ArrowRight, Download } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function CatalogSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -51,8 +52,8 @@ export function CatalogSection() {
           {/* Left Content */}
           <div className="flex flex-col justify-center">
             <h2
-              className={`font-light text-4xl md:text-5xl lg:text-6xl text-amber-800 mb-6 text-balance transition-all duration-1000 ease-out ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              className={`font-light text-4xl md:text-5xl lg:text-6xl text-amber-800 mb-6 text-balance transition-all duration-700 ease-out ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
             >
               Our Catalog
@@ -60,16 +61,16 @@ export function CatalogSection() {
 
             <div className="space-y-6">
               <p 
-                className={`text-amber-700 text-lg md:text-xl font-light transition-all duration-1000 ease-out delay-200 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                className={`text-amber-700 text-lg md:text-xl font-light transition-all duration-700 ease-out delay-100 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
               >
                 Discover the latest expression of Modern Living Unveiling Homelogy's Essential Collection
               </p>
 
               <p 
-                className={`text-gray-700 text-base md:text-lg leading-relaxed transition-all duration-1000 ease-out delay-300 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                className={`text-gray-700 text-base md:text-lg leading-relaxed transition-all duration-700 ease-out delay-150 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
               >
                 This edition is crafted to elevate your experience, guiding you effortlessly through our collections and
@@ -79,8 +80,8 @@ export function CatalogSection() {
 
             {/* Action Buttons */}
             <div 
-              className={`flex flex-col sm:flex-row gap-6 sm:gap-8 mt-10 transition-all duration-1000 ease-out delay-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              className={`flex flex-col sm:flex-row gap-6 sm:gap-8 mt-10 transition-all duration-700 ease-out delay-200 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
             >
               <Link
@@ -116,31 +117,19 @@ export function CatalogSection() {
             <div className="relative w-full max-w-md h-full">
               {/* Back image - 2023 (leftmost, back) */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl transform -rotate-6 translate-x-0 translate-y-0 opacity-65 hover:opacity-85 transition-opacity z-0">
-                <img
-                  src="/images/HM-Cat-2023.png"
-                  alt="HM Catalog 2023"
-                  className="w-full h-full object-cover"
-                />
+                <Image src="/images/HM-Cat-2023.png" alt="HM Catalog 2023" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-transparent to-transparent" />
               </div>
 
               {/* Middle image - 2024 */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl transform -rotate-2 translate-x-8 translate-y-6 opacity-80 hover:opacity-95 transition-opacity z-10">
-                <img
-                  src="/images/HM-Cat-2024.png"
-                  alt="HM Catalog 2024"
-                  className="w-full h-full object-cover"
-                />
+                <Image src="/images/HM-Cat-2024.png" alt="HM Catalog 2024" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/15 via-transparent to-transparent" />
               </div>
 
               {/* Front image - 2025 featured (rightmost, front) */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow transform rotate-1 translate-x-16 translate-y-12 z-20">
-                <img
-                  src="/images/hm-cat-2025.png"
-                  alt="HM Catalog 2025"
-                  className="w-full h-full object-cover"
-                />
+                <Image src="/images/hm-cat-2025.png" alt="HM Catalog 2025" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent" />
               </div>
             </div>

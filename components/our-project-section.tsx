@@ -2,17 +2,18 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, X } from "lucide-react"
 import { motion } from "framer-motion"
 
 const sectionFade = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.7 } },
+  visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
 }
 
 const contentReveal = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
 
 const gridReveal = {
@@ -26,7 +27,7 @@ const gridReveal = {
 
 const cardReveal = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
 
 const projects = [
@@ -104,12 +105,13 @@ export function OurProjectSection() {
                 className="group relative aspect-square overflow-hidden rounded-sm cursor-pointer transition-all hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:ring-offset-2"
                 variants={cardReveal}
                 >
-                <img
+                <Image
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 md:p-3">
                   <p className="text-white text-xs font-light">{project.title}</p>
@@ -124,7 +126,7 @@ export function OurProjectSection() {
           className="flex justify-end mt-8 md:mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
           viewport={{ once: true, amount: 0.2 }}
         >
           <Link
@@ -145,12 +147,16 @@ export function OurProjectSection() {
           onClick={() => setEnlargedImage(null)}
         >
           <div className="relative w-full max-w-4xl">
-            <img
-              src={projects.find((p) => p.id === enlargedImage)?.image || "/placeholder.svg"}
-              alt={projects.find((p) => p.id === enlargedImage)?.title}
-              className="w-full h-auto rounded-sm"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div className="relative w-full aspect-[4/3]">
+              <Image
+                src={projects.find((p) => p.id === enlargedImage)?.image || "/placeholder.svg"}
+                alt={projects.find((p) => p.id === enlargedImage)?.title || "Project image"}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="rounded-sm object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
             <button
               onClick={() => setEnlargedImage(null)}
               className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-700"

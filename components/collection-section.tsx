@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
 const collections = [
@@ -42,10 +43,15 @@ export function CollectionSection() {
               className="group relative aspect-[3/5] overflow-hidden"
             >
               {/* Background image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(${collection.image})` }}
-              />
+              <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-110">
+                <Image
+                  src={collection.image || "/placeholder.svg"}
+                  alt={collection.title}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover object-center"
+                />
+              </div>
 
               {/* Title */}
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
