@@ -128,17 +128,28 @@
   
   /* Smooth magnetic scroll effect */
   .snap-y {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
   }
-  
+
   .snap-start {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
   }
   
   /* Enhanced scroll smoothing */
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

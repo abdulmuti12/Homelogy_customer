@@ -5,6 +5,30 @@ import Link from "next/link"
 import { ArrowRight, X } from "lucide-react"
 import { motion } from "framer-motion"
 
+const sectionFade = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7 } },
+}
+
+const contentReveal = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+}
+
+const gridReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const cardReveal = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+}
+
 const projects = [
   {
     id: 1,
@@ -35,22 +59,20 @@ export function OurProjectSection() {
   return (
     <section
       className="flex flex-col justify-center min-h-screen bg-cover bg-top relative"
-      style={{ backgroundImage: "url(/images/collection-bg.jpg)" }}
+      style={{ backgroundImage: "url(/images/xdf.jpg)" }}
     >
       <motion.div
         className="w-full relative z-10 px-6 md:px-12 lg:px-20"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true, amount: 0.3 }}
+        initial="hidden"
+        whileInView="visible"
+        variants={sectionFade}
+        viewport={{ once: true, amount: 0.2 }}
       >
         {/* Title and Description */}
         <motion.div
           className="mb-12 max-w-2xl"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true, amount: 0.3 }}
+          variants={contentReveal}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6">Our Project</h2>
           <p className="text-gray-700 text-sm md:text-base leading-relaxed">
@@ -65,7 +87,13 @@ export function OurProjectSection() {
 
         {/* Gallery Container */}
         <div className="w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+            initial="hidden"
+            whileInView="visible"
+            variants={gridReveal}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {projects.map((project, index) => (
               <motion.button
                 key={project.id}
@@ -74,14 +102,13 @@ export function OurProjectSection() {
                   setEnlargedImage(project.id)
                 }}
                 className="group relative aspect-square overflow-hidden rounded-sm cursor-pointer transition-all hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:ring-offset-2"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                viewport={{ once: true, amount: 0.3 }}
-              >
+                variants={cardReveal}
+                >
                 <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 md:p-3">
@@ -89,7 +116,7 @@ export function OurProjectSection() {
                 </div>
               </motion.button>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Featured Project Title and Load More */}
@@ -98,7 +125,7 @@ export function OurProjectSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <Link
             href="/projects"

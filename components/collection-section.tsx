@@ -30,7 +30,7 @@ export function CollectionSection() {
   return (
     <section
       className="flex flex-col justify-center bg-cover bg-top relative py-20"
-      style={{ backgroundImage: "url(/images/collection-bg.jpg)", minHeight: "105vh" }}
+      style={{ backgroundImage: "url(/images/xdf.jpg)", minHeight: "105vh" }}
     >
       <div className="w-full relative z-10">
         {/* Grid of collections */}

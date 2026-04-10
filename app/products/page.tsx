@@ -175,7 +175,7 @@ export default function ProductsPage() {
       <SiteHeader />
       
       {/* Container utama untuk efek Magnetic/Snap */}
-      <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth" style={{ scrollPaddingTop: '0', scrollBehavior: 'smooth' }}>
+      <div className="h-screen overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth" style={{ scrollPaddingTop: '0', scrollBehavior: 'smooth' }}>
         
         {/* Breadcrumb dan Header Section */}
         <div className="snap-start min-h-screen" style={{

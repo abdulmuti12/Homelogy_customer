@@ -62,12 +62,12 @@ export function HeroSlider() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 transition-opacity duration-700 will-change-[opacity] ${
+            index === currentSlide ? "opacity-100 visible z-10" : "opacity-0 invisible z-0"
           }`}
         >
           {/* Background Image */}
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${slide.image})` }}>
+          <div className="absolute inset-0 bg-cover bg-center transform-gpu" style={{ backgroundImage: `url(${slide.image})` }}>
             <div className="absolute inset-0 bg-black/20" />
           </div>
 

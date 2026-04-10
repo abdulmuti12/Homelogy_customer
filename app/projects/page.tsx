@@ -81,7 +81,7 @@ export default function ProjectsPage() {
 
       {/* Container utama untuk efek Magnetic/Snap */}
       <div
-        className="overflow-y-auto snap-y snap-mandatory scroll-smooth"
+        className="overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth"
         style={{
           backgroundImage: "url(/xdf.jpg)",
           backgroundSize: "cover",

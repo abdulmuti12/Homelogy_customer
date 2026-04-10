@@ -14,11 +14,12 @@ export function CatalogSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true)
+            observer.disconnect()
           }
         })
       },
       {
-        threshold: 0.2, // Trigger saat 20% section terlihat
+        threshold: 0.15, // Trigger sedikit lebih cepat agar transisi terasa ringan
       },
     )
 
