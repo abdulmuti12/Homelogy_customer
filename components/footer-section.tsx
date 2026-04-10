@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Phone, Mail, Instagram, MessageCircle, Facebook, Linkedin } from "lucide-react"
 
 export function FooterSection() {
@@ -105,7 +106,7 @@ export function FooterSection() {
         <div className="flex h-full relative z-10">
           {/* Left Slide - Homelogy Branding */}
           <div className="w-1/2 flex items-center justify-start p-8 relative group">
-            <img src="/images/logo-hm-cokelat.png" alt="Homelogy" className="max-h-16 w-auto ml-4" />
+            <Image src="/images/logo-hm-cokelat.png" alt="Homelogy" width={220} height={64} className="max-h-16 w-auto ml-4" />
           </div>
 
           {/* Right Slide - Address and Navigation Links */}

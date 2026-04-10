@@ -1,27 +1,35 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.1 },
+    transition: { duration: 0.6, when: "beforeChildren", staggerChildren: 0.1 },
   },
 }
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
 
 export function AboutSection() {
   return (
-    <section
-      className="relative w-full min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url(/images/asset-1.jpg)" }}
-    >
+    <section className="relative w-full min-h-screen">
+      <div className="absolute inset-0">
+        <Image
+          src="/images/asset-1.jpg"
+          alt="About background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
       {/* Content Grid: 1 kolom di mobile, 2 kolom di md (tablet/web) */}
       <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-screen">
         

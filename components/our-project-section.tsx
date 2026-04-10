@@ -8,12 +8,12 @@ import { motion } from "framer-motion"
 
 const sectionFade = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, transition: { duration: 0.6 } },
 }
 
 const contentReveal = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
 
 const gridReveal = {
@@ -27,7 +27,7 @@ const gridReveal = {
 
 const cardReveal = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
 
 const projects = [
@@ -126,7 +126,7 @@ export function OurProjectSection() {
           className="flex justify-end mt-8 md:mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
           viewport={{ once: true, amount: 0.2 }}
         >
           <Link
