@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useParams } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { FooterSection } from "@/components/footer-section"
@@ -101,7 +102,6 @@ export default function ProductDetailPage() {
     ].filter((img) => typeof img === "string" && img.trim() !== "")
   }, [product])
 
-  // Keep selected index always valid when images count changes
   useEffect(() => {
     if (!images.length) return
     if (selectedImageIndex > images.length - 1) {
@@ -200,11 +200,14 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-stretch mb-6">
             {/* Left (Main Image) - fix mobile so thumbnails don't overlap title */}
             <div className="lg:h-full">
-              <div className="bg-stone-300/50 rounded-lg overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full">
-                <img
+              <div className="relative bg-stone-300/50 rounded-lg overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full">
+                <Image
                   src={mainImage}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                   onError={(e) => {
                     e.currentTarget.src = "/placeholder.svg"
                   }}
@@ -224,10 +227,12 @@ export default function ProductDetailPage() {
                           : "border-gray-400 hover:border-gray-600"
                       }`}
                     >
-                      <img
+                      <Image
                         src={image}
                         alt={`${product.name} view ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="64px"
+                        className="object-cover"
                         onError={(e) => {
                           e.currentTarget.src = "/placeholder.svg"
                         }}
@@ -268,7 +273,7 @@ export default function ProductDetailPage() {
                   </div>
 
                   <div className="flex gap-2">
-                    <span className="text-gray-700 text-sm min-w-[65px]">Material</span>
+                    <span className="text-gray-700 text-sm min-w-[65px]">Color</span>
                     <span className="text-gray-700 text-sm">:</span>
                     <span className="text-gray-700 text-sm">{product.color}</span>
                   </div>
@@ -315,10 +320,12 @@ export default function ProductDetailPage() {
                       : "border-gray-400 hover:border-gray-600"
                   }`}
                 >
-                  <img
+                  <Image
                     src={image}
                     alt={`${product.name} view ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="64px"
+                    className="object-cover"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder.svg"
                     }}
@@ -341,11 +348,13 @@ export default function ProductDetailPage() {
                     href={`/products/item/${relatedProduct.id}`}
                     className="group cursor-pointer"
                   >
-                    <div className="bg-white rounded-lg overflow-hidden mb-2 shadow-md transition-transform duration-300 group-hover:scale-105">
-                      <img
+                    <div className="relative bg-white rounded-lg overflow-hidden mb-2 shadow-md transition-transform duration-300 group-hover:scale-105 aspect-square">
+                      <Image
                         src={relatedProduct.image1 || "/placeholder.svg"}
                         alt={relatedProduct.name}
-                        className="w-full aspect-square object-cover"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover"
                         onError={(e) => {
                           e.currentTarget.src = "/placeholder.svg"
                         }}
