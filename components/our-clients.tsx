@@ -62,51 +62,51 @@ export function OurClients() {
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
                 ) : index === 3 ? (
-                  <img
-                    src="/images/Logo-Client-38.png"
-                    alt="Raws Entertainment Logo"
+                        <img
+                    src="/images/Logo-Client-28.png"
+                    alt="Garuda Indonesia Logo"
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
                 ) : index === 4 ? (
+                  <img
+                    src="/images/Logo-Client-38.png"
+                    alt="Rans Entertainment Logo"
+                    className="max-w-[85%] max-h-[85%] object-contain"
+                  />
+                ) : index === 5 ? (
                   <img
                     src="/images/Logo-Client-29.png"
                     alt="Skelevator Logo"
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
-                ) : index === 5 ? (
-                  <img
-                    src="/images/Logo-Client-30.png"
-                    alt="K Thengono Logo"
-                    className="max-w-[85%] max-h-[85%] object-contain"
-                  />
                 ) : index === 6 ? (
-                  <img
-                    src="/images/Logo-Client-28.png"
-                    alt="Garuda Indonesia Logo"
-                    className="max-w-[85%] max-h-[85%] object-contain"
-                  />
-                ) : index === 7 ? (
-                  <img
-                    src="/images/Logo-Client-37.png"
-                    alt="MM Logo"
-                    className="max-w-[85%] max-h-[85%] object-contain"
-                  />
-                ) : index === 8 ? (
                   <img
                     src="/images/Logo-Client-36.png"
                     alt="Tiger Logo"
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
-                ) : index === 9 ? (
+                ) : index === 7 ? (
                   <img
                     src="/images/Logo-Client-35.png"
                     alt="HNI Halal Network International Logo"
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
+                ) : index === 8 ? (
+                  <img
+                    src="/images/Logo-Client-30.png"
+                    alt="K Thengono Logo"
+                    className="max-w-[85%] max-h-[85%] object-contain"
+                  />
+                ) : index === 9 ? (
+                  <img
+                    src="/images/Logo-Client-37.png"
+                    alt="MM Logo"
+                    className="max-w-[85%] max-h-[85%] object-contain"
+                  />
                 ) : index === 10 ? (
                   <img
                     src="/images/Logo-Client-34.png"
-                    alt="Mirror Torsi M Logo"
+                    alt="Mirror - Mirror Logo"
                     className="max-w-[85%] max-h-[85%] object-contain"
                   />
                 ) : (
