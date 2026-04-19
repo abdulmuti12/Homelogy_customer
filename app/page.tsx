@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/about-section"
 import { CollectionSection } from "@/components/collection-section"
 import { OurProjectSection } from "@/components/our-project-section"
 import { CatalogSection } from "@/components/catalog-section"
+import { PressReleaseSection } from "@/components/press-realease-section"
 import { FooterSection } from "@/components/footer-section"
 
 export default function Home() {
@@ -33,6 +34,9 @@ export default function Home() {
 
         <div className="snap-start min-h-screen">
           <CatalogSection />
+        </div>
+         <div className="snap-start min-h-screen">
+            <PressReleaseSection />        
         </div>
 
         {/* Footer - use h-auto to fit content naturally */}
