@@ -75,7 +75,7 @@ export default function PressDetailPage() {
       setLoading(true)
       try {
         // Ambil data dari API
-        const response = await fetch('https://casaitalia-living.com/api/press')
+        const response = await fetch('https://homelogystyle.com/api/press')
         const result = await response.json()
 
         if (result.success && result.data && result.data.data) {
@@ -89,7 +89,7 @@ export default function PressDetailPage() {
           } else {
             // Fallback: Jika tidak ditemukan di list halaman pertama, coba hit endpoint detail langsung
             try {
-              const detailRes = await fetch(`https://casaitalia-living.com/api/press/${id}`)
+              const detailRes = await fetch(`https://homelogystyle.com/api/press/${id}`)
               const detailResult = await detailRes.json()
               if (detailResult.success && detailResult.data) {
                 setRelease(detailResult.data)

@@ -72,7 +72,7 @@ export default function PressPage() {
     const fetchPressReleases = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`https://casaitalia-living.com/api/press?page=${currentPage}`)
+        const response = await fetch(`https://homelogystyle.com/api/press?page=${currentPage}`)
         const result = await response.json()
 
         if (result.success && result.data) {
