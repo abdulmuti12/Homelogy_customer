@@ -226,10 +226,8 @@ export default function ProductsPage() {
 
                 <div className="lg:w-2/3 flex flex-col justify-start">
                   <p className="text-gray-700 text-sm leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                  </p>
+                    Built for everyday use, our pieces focus on what truly matters comfort you can feel from the moment you sit, materials chosen to last over time.
+                    Made for homes that are actually lived in, where routines unfold, conversations happen, and every detail quietly supports the way you live.                  </p>
                 </div>
               </div>
 
