@@ -135,8 +135,10 @@ export default function ProjectsPage() {
                       transition={{ duration: 0.7, delay: 0.2 }}
                       viewport={{ once: true, amount: 0.3 }}
                     >
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                      laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                      Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
+                      Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space. Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
+                      Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
+
                     </motion.p>
                   </motion.div>
 
