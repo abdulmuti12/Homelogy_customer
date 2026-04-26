@@ -81,7 +81,7 @@ export default function ProjectsPage() {
 
       {/* Container utama untuk efek Magnetic/Snap */}
       <div
-        className="overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth"
+        className="h-screen overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth"
         style={{
           backgroundImage: "url(/xdf.jpg)",
           backgroundSize: "cover",
@@ -92,8 +92,8 @@ export default function ProjectsPage() {
         }}
       >
         <div className="snap-start">
-          <section className="px-6 md:px-12 lg:px-20 py-6 pt-24 md:pt-28 min-h-screen flex flex-col">
-            <div className="max-w-7xl mx-auto">
+          <section className="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-6 pt-24 md:pt-28 lg:pt-32 min-h-screen flex flex-col">
+            <div className="w-full max-w-[1600px] mx-auto">
               <div className="mb-12">
                 <Breadcrumb>
                   <BreadcrumbList>
@@ -110,17 +110,17 @@ export default function ProjectsPage() {
                 </Breadcrumb>
               </div>
 
-              <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16">
+              <div className="w-full">
+                <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 mb-12 md:mb-16">
                   <motion.div
-                    className="lg:w-3/5"
+                    className="w-full xl:w-3/5"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
                     <motion.h1
-                      className="font-light text-5xl md:text-6xl text-amber-900 font-serif mb-6"
+                      className="font-light text-[clamp(2.2rem,5vw,4.2rem)] text-amber-900 font-serif mb-5 md:mb-6 leading-tight"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.7 }}
@@ -129,16 +129,16 @@ export default function ProjectsPage() {
                       Our Project
                     </motion.h1>
                     <motion.p
-                      className="text-gray-700 text-sm leading-relaxed"
+                      className="text-gray-700 text-sm md:text-base leading-relaxed max-w-3xl"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.7, delay: 0.2 }}
                       viewport={{ once: true, amount: 0.3 }}
                     >
-                      <span className="block lg:whitespace-nowrap text-justify [text-align-last:justify]">
+                      <span className="block">
                         Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
                       </span>
-                      <span className="block lg:whitespace-nowrap text-justify [text-align-last:justify]">
+                      <span className="block">
                         Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
                       </span>
                       {/* <span className="block lg:whitespace-nowrap text-justify [text-align-last:justify]">
@@ -148,7 +148,7 @@ export default function ProjectsPage() {
                   </motion.div>
 
                   <motion.div
-                    className="lg:w-2/5 flex flex-wrap gap-3 lg:justify-end items-start"
+                    className="w-full xl:w-2/5 flex flex-wrap gap-3 xl:justify-end items-start"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
                     <p className="text-gray-600">No projects found</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 2xl:gap-10 mb-12 md:mb-16">
                     {paginatedProjects.map((project, index) => (
                       <motion.div
                         key={project.id}
@@ -231,7 +231,7 @@ export default function ProjectsPage() {
                 )}
 
                 {!loading && projects.length > 0 && (
-                  <div className="flex items-center justify-center gap-2">
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
                     <button
                       onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       disabled={currentPage === 1}
