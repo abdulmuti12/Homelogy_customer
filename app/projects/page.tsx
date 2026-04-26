@@ -92,8 +92,8 @@ export default function ProjectsPage() {
         }}
       >
         <div className="snap-start">
-          <section className="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-6 pt-24 md:pt-28 lg:pt-32 min-h-screen flex flex-col">
-            <div className="w-full max-w-[1600px] mx-auto">
+          <section className="px-6 md:px-12 lg:px-20 2xl:px-24 py-6 pt-24 md:pt-28 lg:pt-32 min-h-screen flex flex-col">
+            <div className="w-full max-w-[1800px] mx-auto">
               <div className="mb-12">
                 <Breadcrumb>
                   <BreadcrumbList>
@@ -120,7 +120,7 @@ export default function ProjectsPage() {
                     viewport={{ once: true, amount: 0.3 }}
                   >
                     <motion.h1
-                      className="font-light text-[clamp(2.2rem,5vw,4.2rem)] text-amber-900 font-serif mb-5 md:mb-6 leading-tight"
+                      className="font-light text-[clamp(2.25rem,4.8vw,5rem)] text-amber-900 font-serif mb-5 md:mb-6 leading-tight"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.7 }}
@@ -129,7 +129,7 @@ export default function ProjectsPage() {
                       Our Project
                     </motion.h1>
                     <motion.p
-                      className="text-gray-700 text-sm md:text-base leading-relaxed max-w-3xl"
+                      className="text-gray-700 text-sm md:text-base 2xl:text-lg leading-relaxed max-w-4xl"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.7, delay: 0.2 }}
@@ -148,7 +148,7 @@ export default function ProjectsPage() {
                   </motion.div>
 
                   <motion.div
-                    className="w-full xl:w-2/5 flex flex-wrap gap-3 xl:justify-end items-start"
+                    className="w-full xl:w-2/5 flex flex-wrap gap-3 md:gap-4 xl:justify-end items-start"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                           setSelectedFilter(filter)
                           setCurrentPage(1)
                         }}
-                        className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                        className={`px-6 py-2 rounded-full text-sm font-medium transition-all 2xl:px-7 2xl:py-2.5 2xl:text-base ${
                           selectedFilter === filter ? "bg-amber-900 text-white" : "bg-gray-800 text-white hover:bg-gray-700"
                         }`}
                         initial={{ opacity: 0, y: 20 }}
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
                     <p className="text-gray-600">No projects found</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 2xl:gap-10 mb-12 md:mb-16">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8 2xl:gap-10 mb-12 md:mb-16">
                     {paginatedProjects.map((project, index) => (
                       <motion.div
                         key={project.id}
@@ -221,8 +221,8 @@ export default function ProjectsPage() {
                             transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                             viewport={{ once: true, amount: 0.2 }}
                           >
-                            <h3 className="text-gray-900 font-medium text-base md:text-lg">{project.name}</h3>
-                            <p className="text-gray-600 text-sm">{project.architect}</p>
+                            <h3 className="text-gray-900 font-medium text-base md:text-lg 2xl:text-xl">{project.name}</h3>
+                            <p className="text-gray-600 text-sm 2xl:text-base">{project.architect}</p>
                           </motion.div>
                         </Link>
                       </motion.div>
