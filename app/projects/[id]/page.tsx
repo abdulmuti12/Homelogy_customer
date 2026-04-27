@@ -167,21 +167,25 @@ export default function ProjectDetailPage() {
 
               {/* Project Details */}
               <div className="mb-8 space-y-3 text-sm">
-                <div className="flex gap-6">
+                <div className="grid grid-cols-[110px_12px_1fr] items-start">
                   <span className="text-gray-600 font-light">Architect</span>
-                  <span className="text-gray-900">: {project.architect}</span>
+                  <span className="text-gray-900">:</span>
+                  <span className="text-gray-900">{project.architect}</span>
                 </div>
-                <div className="flex gap-6">
+                <div className="grid grid-cols-[110px_12px_1fr] items-start">
                   <span className="text-gray-600 font-light">Location</span>
-                  <span className="text-gray-900">: {project.location}</span>
+                  <span className="text-gray-900">:</span>
+                  <span className="text-gray-900">{project.location}</span>
                 </div>
-                <div className="flex gap-6">
+                <div className="grid grid-cols-[110px_12px_1fr] items-start">
                   <span className="text-gray-600 font-light">Year</span>
-                  <span className="text-gray-900">: {project.project_time}</span>
+                  <span className="text-gray-900">:</span>
+                  <span className="text-gray-900">{project.project_time}</span>
                 </div>
-                <div className="flex gap-6">
+                <div className="grid grid-cols-[110px_12px_1fr] items-start">
                   <span className="text-gray-600 font-light">Photo</span>
-                  <span className="text-gray-900">: {project.photo_created}</span>
+                  <span className="text-gray-900">:</span>
+                  <span className="text-gray-900">{project.photo_created}</span>
                 </div>
               </div>
 
