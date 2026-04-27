@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { FooterSection } from "@/components/footer-section"
@@ -71,6 +71,52 @@ export default function ProjectDetailPage() {
     }
   }, [projectId])
 
+  const galleryImages = useMemo(
+    () => {
+      if (!project) return []
+      return [project.file, project.file2, project.file3, project.file4]
+        .filter((img): img is string => typeof img === "string" && img.trim() !== "")
+        .map((img) => img.trim())
+    },
+    [project],
+  )
+
+  const visibleThumbCount = 3
+
+  const thumbnailStartIndex = useMemo(() => {
+    if (galleryImages.length <= visibleThumbCount) return 0
+    const maxStart = galleryImages.length - visibleThumbCount
+    return Math.min(Math.max(currentImageIndex - visibleThumbCount + 1, 0), maxStart)
+  }, [galleryImages.length, currentImageIndex])
+
+  const visibleGalleryImages = useMemo(
+    () =>
+      galleryImages
+        .slice(thumbnailStartIndex, thumbnailStartIndex + visibleThumbCount)
+        .map((image, offset) => ({
+          image,
+          index: thumbnailStartIndex + offset,
+        })),
+    [galleryImages, thumbnailStartIndex],
+  )
+
+  useEffect(() => {
+    if (!galleryImages.length) return
+    if (currentImageIndex > galleryImages.length - 1) {
+      setCurrentImageIndex(0)
+    }
+  }, [galleryImages, currentImageIndex])
+
+  const handlePreviousImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))
+  }
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))
+  }
+
+  const currentImage = galleryImages[currentImageIndex] || "/placeholder.svg"
+
   if (loading) {
     return (
       <main className="min-h-screen bg-gray-100">
@@ -92,18 +138,6 @@ export default function ProjectDetailPage() {
       </main>
     )
   }
-
-  const galleryImages = [project.file, project.file2, project.file3, project.file4].filter(Boolean)
-
-  const handlePreviousImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))
-  }
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))
-  }
-
-  const currentImage = galleryImages[currentImageIndex] || "/placeholder.svg"
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -160,7 +194,7 @@ export default function ProjectDetailPage() {
               <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-300">
                 <img
                   src={currentImage || "/placeholder.svg"}
-                  alt={project.title}
+                  alt={project.name}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -188,7 +222,7 @@ export default function ProjectDetailPage() {
           {/* Gallery Thumbnails */}
           {galleryImages.length > 0 && (
             <div className="grid grid-cols-3 gap-6">
-              {galleryImages.map((image, index) => (
+              {visibleGalleryImages.map(({ image, index }) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
