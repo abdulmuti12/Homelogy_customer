@@ -137,8 +137,6 @@ export default function ProjectsPage() {
                     >
                       <span className="block">
                         Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
-                      </span>
-                      <span className="block">
                         Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
                       </span>
                       {/* <span className="block lg:whitespace-nowrap text-justify [text-align-last:justify]">
