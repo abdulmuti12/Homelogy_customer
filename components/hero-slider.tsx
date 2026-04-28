@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 const slides = [
   {
     image: "/images/slide-1.png",
-    title: "Furniture with",
+    title: "Furniture with Living Philosophy",
     subtitle: "",
     description: "",
   },
@@ -20,7 +20,7 @@ const slides = [
     tag: "",
   },
   {
-    image: "/images/Home_Slide_3.jpg",
+    image: "/images/slide3.jpeg",
     title: "",
     subtitle: "-",
     description: "-",
@@ -84,8 +84,23 @@ export function HeroSlider() {
           <div className="relative z-10 flex h-full items-center justify-center">
             <div className="text-center px-4">
               {slide.tag && <p className="text-white/90 text-sm md:text-base mb-4 tracking-wider">{slide.tag}</p>}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-2 tracking-tight">
-                <span className="italic font-serif">{slide.title}</span> {slide.subtitle}
+              <h1
+                className={`font-light text-white mb-2 tracking-tight ${
+                  slide.title === "Furniture with Living Philosophy"
+                    ? "text-3xl md:text-5xl lg:text-6xl"
+                    : "text-4xl md:text-6xl lg:text-7xl"
+                }`}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Adobe Garamond Pro", Garamond',
+                    fontWeight: 400,
+                    fontStyle: "normal",
+                  }}
+                >
+                  {slide.title}
+                </span>{" "}
+                {slide.subtitle}
               </h1>
               <p className="text-white/80 text-base md:text-lg mt-6 max-w-2xl mx-auto leading-relaxed">
                 {slide.description}
