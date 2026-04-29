@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowRight, X } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -30,32 +29,70 @@ const cardReveal = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
 
-const projects = [
-  {
-    id: 1,
-    title: "PI House",
-    image: "/modern-living-room.png",
-  },
-  {
-    id: 2,
-    title: "PM House",
-    image: "/luxury-bedroom.png",
-  },
-  {
-    id: 3,
-    title: "PIK Project",
-    image: "/contemporary-office-space-design.jpg",
-  },
-  {
-    id: 4,
-    title: "Rimau Office",
-    image: "/modern-office-interior.png",
-  },
-]
+type Project = {
+  file: string
+  name: string
+  project_time?: string
+  designer?: string
+}
+
+const API_URL = "https://homelogystyle.com/api/customers/project/list"
+const IMAGE_ORIGIN = "https://homelogystyle.com"
 
 export function OurProjectSection() {
-  const [selectedProject, setSelectedProject] = useState(projects[1])
-  const [enlargedImage, setEnlargedImage] = useState<number | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [enlargedProject, setEnlargedProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadProjects() {
+      try {
+        const response = await fetch(API_URL)
+        if (!response.ok) {
+          throw new Error(`Failed to load projects: ${response.status}`)
+        }
+
+        const payload = await response.json()
+        if (!payload?.success || !Array.isArray(payload.data)) {
+          throw new Error("Invalid project API response")
+        }
+
+        const loadedProjects: Project[] = payload.data
+        if (!cancelled) {
+          setProjects(loadedProjects)
+          setSelectedProject(loadedProjects[0] ?? null)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : String(err))
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadProjects()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  function resolveImageUrl(file: string) {
+    if (!file) return "/placeholder.svg"
+
+    if (file.startsWith("http://") || file.startsWith("https://")) {
+      return file
+    }
+
+    const cleanPath = file.startsWith("/") ? file : `/${file}`
+    return `https://homelogystyle.com/storage${cleanPath}`
+  }
 
   return (
     <section
@@ -71,55 +108,105 @@ export function OurProjectSection() {
       >
         {/* Title and Description */}
         <motion.div
-          className="mb-12 max-w-2xl"
+          className="mb-12 max-w-3xl"
           variants={contentReveal}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <h2 className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6">Our Project</h2>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-           Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
-           Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space. Through 
-           thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication 
-           and contemporary living.
-            
-           Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
+          <h2
+            className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
+            style={{ marginTop: "1cm" }}
+          >
+            Our Project
+          </h2>
+          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+            <span className="block">
+              Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
+            {/* </span>
+            <span className="block"> */}
+              Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
+            </span>
+            <span className="block">
+              Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
+            {/* </span>
+            <span className="block"> */}
+              Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
+            </span>
           </p>
         </motion.div>
 
         {/* Gallery Container */}
         <div className="w-full">
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {[...Array(4)].map((_, index) => (
+                <div key={index} className="aspect-square rounded-sm bg-slate-200/80 animate-pulse" />
+              ))}
+            </div>
+          ) : error ? (
+            <div className="rounded-sm bg-red-50 border border-red-200 p-4 text-red-700">
+              Gagal memuat proyek: {error}
+            </div>
+          ) : (
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+              initial="hidden"
+              whileInView="visible"
+              variants={gridReveal}
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              {projects.map((project, index) => {
+                const imageUrl = resolveImageUrl(project.file)
+                return (
+                  <motion.button
+                    key={`${project.file}-${index}`}
+                    onClick={() => {
+                      setSelectedProject(project)
+                      setEnlargedProject(project)
+                    }}
+                    className="group cursor-pointer"
+                    variants={cardReveal}
+                  >
+                    <motion.div
+                      className="bg-white rounded-lg overflow-hidden mb-4 transition-transform duration-300 group-hover:scale-105 relative"
+                      whileHover={{ y: -5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img
+                        src={imageUrl}
+                        alt={project.name}
+                        className="w-full aspect-square object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder.svg"
+                        }}
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 md:p-3">
+                        <p className="text-white text-xs font-light">{project.name}</p>
+                      </div>
+                    </motion.div>
+                  </motion.button>
+                )
+              })}
+            </motion.div>
+          )}
+        </div>
+
+        {/* {selectedProject && (
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-            initial="hidden"
-            whileInView="visible"
-            variants={gridReveal}
+            className="mt-8 rounded-sm bg-white/90 p-4 text-sm text-gray-700 shadow-sm"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true, amount: 0.2 }}
           >
-            {projects.map((project, index) => (
-              <motion.button
-                key={project.id}
-                onClick={() => {
-                  setSelectedProject(project)
-                  setEnlargedImage(project.id)
-                }}
-                className="group relative aspect-square overflow-hidden rounded-sm cursor-pointer transition-all hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:ring-offset-2"
-                variants={cardReveal}
-                >
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  priority={index === 0}
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 md:p-3">
-                  <p className="text-white text-xs font-light">{project.title}</p>
-                </div>
-              </motion.button>
-            ))}
+            <p className="font-semibold text-amber-900">{selectedProject.name}</p>
+            {selectedProject.designer ? (
+              <p className="mt-1 text-xs">Designer: {selectedProject.designer}</p>
+            ) : null}
+            {selectedProject.project_time ? (
+              <p className="mt-1 text-xs text-gray-600">{selectedProject.project_time}</p>
+            ) : null}
           </motion.div>
-        </div>
+        )} */}
 
         {/* Featured Project Title and Load More */}
         <motion.div
@@ -141,24 +228,22 @@ export function OurProjectSection() {
         </motion.div>
       </motion.div>
 
-      {enlargedImage !== null && (
+      {enlargedProject && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-          onClick={() => setEnlargedImage(null)}
+          onClick={() => setEnlargedProject(null)}
         >
           <div className="relative w-full max-w-4xl">
-            <div className="relative w-full aspect-[4/3]">
-              <Image
-                src={projects.find((p) => p.id === enlargedImage)?.image || "/placeholder.svg"}
-                alt={projects.find((p) => p.id === enlargedImage)?.title || "Project image"}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="rounded-sm object-contain"
+            <div className="w-full aspect-[4/3] overflow-hidden rounded-sm bg-black">
+              <img
+                src={resolveImageUrl(enlargedProject.file)}
+                alt={enlargedProject.name}
+                className="h-full w-full object-contain"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
             <button
-              onClick={() => setEnlargedImage(null)}
+              onClick={() => setEnlargedProject(null)}
               className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-700"
               aria-label="Close"
             >
