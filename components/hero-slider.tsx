@@ -16,21 +16,21 @@ const slides = [
     image: "/images/Home_Slide_2.jpg",
     title: "",
     subtitle: " ",
-    description: "-",
+    description: " ",
     tag: "",
   },
   {
     image: "/images/slide3.jpeg",
     title: "",
-    subtitle: "-",
-    description: "-",
+    subtitle: " ",
+    description: " ",
     tag: "",
   },
   {
     image: "/images/Home_Slide_4.jpeg",
     title: "Modern",
-    subtitle: "-",
-    description: "-",
+    subtitle: " ",
+    description: " ",
   },
 ]
 
