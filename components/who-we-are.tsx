@@ -40,7 +40,7 @@ export function WhoWeAre() {
               viewport={{ once: true, amount: 0.3 }}
             >
               <p>
-                Homelogy Style is defined by the vision of Claudia Apriliana, Creative Director, and Ayleen Apriliana, Managing Director.
+                Homelogy Style is defined by the vision of Claudia Apriliana, Creative Director, and Ayleen Apriliani, Managing Director.
                 Claudia Apriliana shapes the creative direction of the brand, expressing a design language centered on 
                 refined forms, balanced proportions, and a deep sensitivity to materials.
               </p>
