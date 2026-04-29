@@ -46,7 +46,7 @@ export function WhoWeAre() {
               </p>
 
               <p>
-                Ayleen Apriliana oversees the strategic development of Homelogy Style, guiding the brand’s growth, partnerships, and operations 
+                Ayleen Apriliani oversees the strategic development of Homelogy Style, guiding the brand’s growth, partnerships, and operations 
                 with clarity and precision.
                 
                 Together, they shape Homelogy Style through a shared commitment to craftsmanship, design integrity, and a cultivated perspective 
