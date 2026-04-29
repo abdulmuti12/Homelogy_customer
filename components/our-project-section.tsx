@@ -125,6 +125,8 @@ export function OurProjectSection() {
             <span className="block"> */}
               Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
             </span>
+                        <br />
+
             <span className="block">
               Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
             {/* </span>
