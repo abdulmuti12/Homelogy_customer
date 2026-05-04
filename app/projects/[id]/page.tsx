@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { FooterSection } from "@/components/footer-section"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface ProjectData {
   id: number
@@ -31,6 +32,15 @@ interface ApiResponse {
   }
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://homelogystyle.com/api"
+
+function resolveImageUrl(file: string) {
+  if (!file) return "/placeholder.svg"
+  if (file.startsWith("http://") || file.startsWith("https://")) return file
+  const cleanPath = file.startsWith("/") ? file : `/${file}`
+  return `https://homelogystyle.com/storage${cleanPath}`
+}
+
 export default function ProjectDetailPage() {
   const params = useParams()
   const router = useRouter()
@@ -42,44 +52,38 @@ export default function ProjectDetailPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchProject = async () => {
+    let cancelled = false
+
+    async function fetchProject() {
       try {
-        setLoading(true)
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/project/${projectId}`)
+        const response = await fetch(`${API_URL}/customers/project/${projectId}`, {
+          next: { revalidate: 300 },
+        })
         const json: ApiResponse = await response.json()
 
-        console.log("[v0] Project Detail API Response:", json)
-
-        if (json.success && json.data?.general) {
+        if (json.success && json.data?.general && !cancelled) {
           setProject(json.data.general)
           setError(null)
-        } else {
+        } else if (!cancelled) {
           setError(json.message || "Failed to load project details")
-          setProject(null)
         }
-      } catch (err) {
-        console.log("[v0] Project Detail API Error:", err)
-        setError("Failed to connect to server")
-        setProject(null)
+      } catch {
+        if (!cancelled) setError("Failed to connect to server")
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
 
-    if (projectId) {
-      fetchProject()
-    }
+    if (projectId) fetchProject()
+    return () => { cancelled = true }
   }, [projectId])
 
-  const galleryImages = useMemo(
-    () => {
-      if (!project) return []
-      return [project.file, project.file2, project.file3, project.file4]
-        .filter((img): img is string => typeof img === "string" && img.trim() !== "")
-        .map((img) => img.trim())
-    },
-    [project],
-  )
+  const galleryImages = useMemo(() => {
+    if (!project) return []
+    return [project.file, project.file2, project.file3, project.file4]
+      .filter((img): img is string => typeof img === "string" && img.trim() !== "")
+      .map((img) => img.trim())
+  }, [project])
 
   const visibleThumbCount = 3
 
@@ -101,8 +105,7 @@ export default function ProjectDetailPage() {
   )
 
   useEffect(() => {
-    if (!galleryImages.length) return
-    if (currentImageIndex > galleryImages.length - 1) {
+    if (galleryImages.length && currentImageIndex > galleryImages.length - 1) {
       setCurrentImageIndex(0)
     }
   }, [galleryImages, currentImageIndex])
@@ -143,7 +146,6 @@ export default function ProjectDetailPage() {
     <main className="min-h-screen bg-gray-100">
       <SiteHeader />
 
-      {/* Project Detail Section */}
       <section className="px-6 md:px-12 lg:px-20 py-12 md:py-20">
         <div className="max-w-7xl mx-auto">
           {/* Back Button */}
@@ -165,41 +167,35 @@ export default function ProjectDetailPage() {
                 {project.name}
               </h1>
 
-              {/* Project Details */}
               <div className="mb-8 space-y-3 text-sm">
-                <div className="grid grid-cols-[110px_12px_1fr] items-start">
-                  <span className="text-gray-600 font-light">Architect</span>
-                  <span className="text-gray-900">:</span>
-                  <span className="text-gray-900">{project.architect}</span>
-                </div>
-                <div className="grid grid-cols-[110px_12px_1fr] items-start">
-                  <span className="text-gray-600 font-light">Location</span>
-                  <span className="text-gray-900">:</span>
-                  <span className="text-gray-900">{project.location}</span>
-                </div>
-                <div className="grid grid-cols-[110px_12px_1fr] items-start">
-                  <span className="text-gray-600 font-light">Year</span>
-                  <span className="text-gray-900">:</span>
-                  <span className="text-gray-900">{project.project_time}</span>
-                </div>
-                <div className="grid grid-cols-[110px_12px_1fr] items-start">
-                  <span className="text-gray-600 font-light">Photo</span>
-                  <span className="text-gray-900">:</span>
-                  <span className="text-gray-900">{project.photo_created}</span>
-                </div>
+                {[
+                  { label: "Architect", value: project.architect },
+                  { label: "Location", value: project.location },
+                  { label: "Year", value: project.project_time },
+                  { label: "Photo", value: project.photo_created },
+                ].map(({ label, value }) => (
+                  <div key={label} className="grid grid-cols-[110px_12px_1fr] items-start">
+                    <span className="text-gray-600 font-light">{label}</span>
+                    <span className="text-gray-900">:</span>
+                    <span className="text-gray-900">{value}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Description */}
               <p className="text-gray-700 text-sm leading-relaxed font-light">{project.description}</p>
             </div>
 
             {/* Right: Main Image with Navigation */}
             <div className="flex flex-col gap-4">
               <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-300">
-                <img
-                  src={currentImage || "/placeholder.svg"}
+                <Image
+                  src={resolveImageUrl(currentImage)}
                   alt={project.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  quality={80}
                 />
               </div>
 
@@ -234,13 +230,13 @@ export default function ProjectDetailPage() {
                     index === currentImageIndex ? "ring-2 ring-amber-700" : "hover:opacity-80"
                   }`}
                 >
-                  <img
-                    src={image || "/placeholder.svg"}
+                  <Image
+                    src={resolveImageUrl(image)}
                     alt={`Gallery ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = "/placeholder.svg"
-                    }}
+                    fill
+                    sizes="33vw"
+                    className="object-cover"
+                    quality={65}
                   />
                 </button>
               ))}

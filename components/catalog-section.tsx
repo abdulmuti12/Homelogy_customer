@@ -19,19 +19,12 @@ export function CatalogSection() {
           }
         })
       },
-      {
-        threshold: 0.15, // Trigger sedikit lebih cepat agar transisi terasa ringan
-      },
+      { threshold: 0.15 },
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
     }
   }, [])
 
@@ -40,7 +33,7 @@ export function CatalogSection() {
       ref={sectionRef}
       className="w-full min-h-screen flex items-center justify-center snap-start"
       style={{
-        backgroundImage: "url(/xdf.jpg)",
+        backgroundImage: "url(/images/xdf.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
@@ -48,7 +41,7 @@ export function CatalogSection() {
     >
       <div className="w-full px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
+
           {/* Left Content */}
           <div className="flex flex-col justify-center">
             <h2
@@ -60,7 +53,7 @@ export function CatalogSection() {
             </h2>
 
             <div className="space-y-6">
-              <p 
+              <p
                 className={`text-amber-700 text-lg md:text-xl font-light transition-all duration-700 ease-out delay-100 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
@@ -68,18 +61,17 @@ export function CatalogSection() {
                 Discover the latest expression of Modern Living Unveiling Homelogy's Essential Collection
               </p>
 
-              <p 
+              <p
                 className={`text-gray-700 text-base md:text-lg leading-relaxed transition-all duration-700 ease-out delay-150 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
               >
-                This edition is crafted to elevate your experience, guiding you effortlessly through our collections and
-                showcasing the refined pieces that embody Homelogy's modern living philosophy.
+                This edition is crafted to elevate your experience, guiding you effortlessly through our
+                collections and showcasing the refined pieces that embody Homelogy's modern living philosophy.
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div 
+            <div
               className={`flex flex-col sm:flex-row gap-6 sm:gap-8 mt-10 transition-all duration-700 ease-out delay-200 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
@@ -109,27 +101,48 @@ export function CatalogSection() {
           </div>
 
           {/* Right Content - Stacked Images */}
-          <div 
+          <div
             className={`relative h-80 md:h-96 flex items-center justify-center lg:justify-end transition-all duration-1000 ease-out delay-700 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
             }`}
           >
             <div className="relative w-full max-w-md h-full">
-              {/* Back image - 2023 (leftmost, back) */}
+              {/* Back image - 2023 */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl transform -rotate-6 translate-x-0 translate-y-0 opacity-65 hover:opacity-85 transition-opacity z-0">
-                <Image src="/images/HM-Cat-2023.png" alt="HM Catalog 2023" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
+                <Image
+                  src="/images/HM-Cat-2023.png"
+                  alt="HM Catalog 2023"
+                  fill
+                  sizes="(max-width: 1024px) 80vw, 420px"
+                  className="object-cover"
+                  quality={70}
+                />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-transparent to-transparent" />
               </div>
 
               {/* Middle image - 2024 */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl transform -rotate-2 translate-x-8 translate-y-6 opacity-80 hover:opacity-95 transition-opacity z-10">
-                <Image src="/images/HM-Cat-2024.png" alt="HM Catalog 2024" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
+                <Image
+                  src="/images/HM-Cat-2024.png"
+                  alt="HM Catalog 2024"
+                  fill
+                  sizes="(max-width: 1024px) 80vw, 420px"
+                  className="object-cover"
+                  quality={70}
+                />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/15 via-transparent to-transparent" />
               </div>
 
-              {/* Front image - 2025 featured (rightmost, front) */}
+              {/* Front image - 2025 */}
               <div className="absolute inset-0 rounded-lg overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow transform rotate-1 translate-x-16 translate-y-12 z-20">
-                <Image src="/images/hm-cat-2025.png" alt="HM Catalog 2025" fill sizes="(max-width: 1024px) 80vw, 420px" className="object-cover" />
+                <Image
+                  src="/images/hm-cat-2025.png"
+                  alt="HM Catalog 2025"
+                  fill
+                  sizes="(max-width: 1024px) 80vw, 420px"
+                  className="object-cover"
+                  quality={75}
+                />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent" />
               </div>
             </div>

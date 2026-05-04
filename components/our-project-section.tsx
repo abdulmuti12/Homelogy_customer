@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowRight, X } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 const sectionFade = {
   hidden: { opacity: 0 },
@@ -19,14 +20,14 @@ const gridReveal = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 }
 
 const cardReveal = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
 type Project = {
@@ -37,11 +38,16 @@ type Project = {
 }
 
 const API_URL = "https://homelogystyle.com/api/customers/project/list"
-const IMAGE_ORIGIN = "https://homelogystyle.com"
+
+function resolveImageUrl(file: string) {
+  if (!file) return "/placeholder.svg"
+  if (file.startsWith("http://") || file.startsWith("https://")) return file
+  const cleanPath = file.startsWith("/") ? file : `/${file}`
+  return `https://homelogystyle.com/storage${cleanPath}`
+}
 
 export function OurProjectSection() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [enlargedProject, setEnlargedProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -51,48 +57,29 @@ export function OurProjectSection() {
 
     async function loadProjects() {
       try {
-        const response = await fetch(API_URL)
-        if (!response.ok) {
-          throw new Error(`Failed to load projects: ${response.status}`)
-        }
-
+        const response = await fetch(API_URL, {
+          next: { revalidate: 300 }, // ISR: revalidate every 5 minutes
+        })
+        if (!response.ok) throw new Error(`Failed: ${response.status}`)
         const payload = await response.json()
-        if (!payload?.success || !Array.isArray(payload.data)) {
-          throw new Error("Invalid project API response")
-        }
+        if (!payload?.success || !Array.isArray(payload.data)) throw new Error("Invalid response")
 
         const loadedProjects: Project[] = payload.data
         if (!cancelled) {
           setProjects(loadedProjects)
-          setSelectedProject(loadedProjects[0] ?? null)
+          setLoading(false)
         }
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : String(err))
-        }
-      } finally {
-        if (!cancelled) {
           setLoading(false)
         }
       }
     }
 
     loadProjects()
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
   }, [])
-
-  function resolveImageUrl(file: string) {
-    if (!file) return "/placeholder.svg"
-
-    if (file.startsWith("http://") || file.startsWith("https://")) {
-      return file
-    }
-
-    const cleanPath = file.startsWith("/") ? file : `/${file}`
-    return `https://homelogystyle.com/storage${cleanPath}`
-  }
 
   return (
     <section
@@ -104,13 +91,11 @@ export function OurProjectSection() {
         initial="hidden"
         whileInView="visible"
         variants={sectionFade}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
-        {/* Title and Description */}
         <motion.div
           className="mb-12 max-w-3xl"
           variants={contentReveal}
-          viewport={{ once: true, amount: 0.2 }}
         >
           <h2
             className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
@@ -120,32 +105,32 @@ export function OurProjectSection() {
           </h2>
           <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
             <span className="block">
-              Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
-            {/* </span>
-            <span className="block"> */}
-              Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
+              Homelogy Style furniture is featured in a range of residential environments where design and
+              lifestyle come together. Each project highlights the presence of carefully designed furniture
+              pieces that shape the atmosphere of a space.
             </span>
-                        <br />
-
+            <br />
             <span className="block">
-              Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
-            {/* </span>
-            <span className="block"> */}
-              Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
+              Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes
+              to interiors that express sophistication and contemporary living. Our projects reflect the
+              versatility of the collection and the ability of each piece to integrate seamlessly within
+              curated interiors.
             </span>
           </p>
         </motion.div>
 
-        {/* Gallery Container */}
         <div className="w-full">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {[...Array(4)].map((_, index) => (
-                <div key={index} className="aspect-square rounded-sm bg-slate-200/80 animate-pulse" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-square rounded-sm bg-slate-200/80 animate-pulse"
+                />
               ))}
             </div>
           ) : error ? (
-            <div className="rounded-sm bg-red-50 border border-red-200 p-4 text-red-700">
+            <div className="rounded-sm bg-red-50 border border-red-200 p-4 text-red-700 text-sm">
               Gagal memuat proyek: {error}
             </div>
           ) : (
@@ -154,17 +139,14 @@ export function OurProjectSection() {
               initial="hidden"
               whileInView="visible"
               variants={gridReveal}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.1 }}
             >
               {projects.map((project, index) => {
                 const imageUrl = resolveImageUrl(project.file)
                 return (
                   <motion.button
                     key={`${project.file}-${index}`}
-                    onClick={() => {
-                      setSelectedProject(project)
-                      setEnlargedProject(project)
-                    }}
+                    onClick={() => setEnlargedProject(project)}
                     className="group cursor-pointer"
                     variants={cardReveal}
                   >
@@ -173,12 +155,17 @@ export function OurProjectSection() {
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <img
+                      {/* Replace raw img with Next.js Image */}
+                      <Image
                         src={imageUrl}
                         alt={project.name}
-                        className="w-full aspect-square object-cover"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover aspect-square"
+                        quality={70}
                         onError={(e) => {
-                          e.currentTarget.src = "/placeholder.svg"
+                          const target = e.currentTarget as HTMLImageElement
+                          target.src = "/placeholder.svg"
                         }}
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 md:p-3">
@@ -192,25 +179,6 @@ export function OurProjectSection() {
           )}
         </div>
 
-        {/* {selectedProject && (
-          <motion.div
-            className="mt-8 rounded-sm bg-white/90 p-4 text-sm text-gray-700 shadow-sm"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <p className="font-semibold text-amber-900">{selectedProject.name}</p>
-            {selectedProject.designer ? (
-              <p className="mt-1 text-xs">Designer: {selectedProject.designer}</p>
-            ) : null}
-            {selectedProject.project_time ? (
-              <p className="mt-1 text-xs text-gray-600">{selectedProject.project_time}</p>
-            ) : null}
-          </motion.div>
-        )} */}
-
-        {/* Featured Project Title and Load More */}
         <motion.div
           className="flex justify-end mt-8 md:mt-12"
           initial={{ opacity: 0, y: 20 }}
@@ -230,30 +198,45 @@ export function OurProjectSection() {
         </motion.div>
       </motion.div>
 
-      {enlargedProject && (
-        <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-          onClick={() => setEnlargedProject(null)}
-        >
-          <div className="relative w-full max-w-4xl">
-            <div className="w-full aspect-[4/3] overflow-hidden rounded-sm bg-black">
-              <img
-                src={resolveImageUrl(enlargedProject.file)}
-                alt={enlargedProject.name}
-                className="h-full w-full object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-            <button
-              onClick={() => setEnlargedProject(null)}
-              className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-700"
-              aria-label="Close"
+      <AnimatePresence>
+        {enlargedProject && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setEnlargedProject(null)}
+          >
+            <motion.div
+              className="relative w-full max-w-4xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="h-6 w-6 text-amber-900" />
-            </button>
-          </div>
-        </div>
-      )}
+              <div className="w-full aspect-[4/3] overflow-hidden rounded-sm bg-black flex items-center justify-center">
+                <Image
+                  src={resolveImageUrl(enlargedProject.file)}
+                  alt={enlargedProject.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 896px"
+                  className="object-contain"
+                  quality={85}
+                  priority
+                />
+              </div>
+              <button
+                onClick={() => setEnlargedProject(null)}
+                className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-700"
+                aria-label="Close"
+              >
+                <X className="h-6 w-6 text-amber-900" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

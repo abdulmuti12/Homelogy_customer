@@ -6,32 +6,18 @@ import Image from "next/image"
 import { Phone, Mail, Instagram, MessageCircle, Facebook, Linkedin } from "lucide-react"
 
 export function FooterSection() {
-  const [activeVideo, setActiveVideo] = useState(0)
-  const [activeFooter, setActiveFooter] = useState(0)
+  const [activeVideo] = useState(0)
 
   const videos = [
     {
       title: "Empty Slide",
-      image: "", // Empty image for first slide
+      image: "",
     },
     {
       title: "Experience User",
       image: "/homelogy-design-center-interior.jpg",
     },
   ]
-
-  const navigationLinks = {
-    column1: [
-      { label: "Products", href: "#" },
-      { label: "Legacy", href: "#" },
-      { label: "Blogs", href: "#" },
-    ],
-    column2: [
-      { label: "Brands", href: "#" },
-      { label: "Privilege", href: "#" },
-      { label: "Contact", href: "#" },
-    ],
-  }
 
   const socialLinks = [
     { icon: Instagram, href: "#", label: "Instagram" },
@@ -41,15 +27,13 @@ export function FooterSection() {
   ]
 
   const footerSlides = [
-    {
-      title: "Homelogy",
-      position: "left",
-    },
-    {
-      title: "Address",
-      position: "right",
-    },
+    { title: "Homelogy", position: "left" as const },
+    { title: "Address", position: "right" as const },
   ]
+
+  void activeVideo
+  void videos
+  void footerSlides
 
   return (
     <footer className="w-full">
@@ -58,31 +42,29 @@ export function FooterSection() {
         <div className="flex h-full">
           {/* Left Side - Showroom Image */}
           <div className="w-1/2 relative group overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url('/images/footer-showroom-hm.jpg')`,
-                backgroundPosition: "center",
-              }}
+            <Image
+              src="/images/footer-showroom-hm.jpg"
+              alt="Homelogy Showroom"
+              fill
+              sizes="50vw"
+              className="object-cover"
+              quality={70}
             />
-            {/* Overlay for better text readability if needed */}
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all" />
           </div>
 
-          {/* Right Side - Experience Luxury Here */}
+          {/* Right Side - Map */}
           <div className="w-1/2 relative group overflow-hidden">
-            {/* Background Map/Image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url('/images/screenshot-202025-12-23-20at-2017.png')`,
-                backgroundPosition: "center",
-              }}
+            <Image
+              src="/images/screenshot-202025-12-23-20at-2017.png"
+              alt="Homelogy Location Map"
+              fill
+              sizes="50vw"
+              className="object-cover"
+              quality={60}
             />
-            {/* Overlay */}
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all" />
 
-            {/* Content */}
             <div className="relative h-full flex flex-col items-center justify-center text-white gap-8">
               <h3 className="text-4xl font-serif text-center">Experience Luxury Here</h3>
               <a
@@ -98,20 +80,26 @@ export function FooterSection() {
         </div>
       </section>
 
-      {/* Footer Content Section - Carousel */}
+      {/* Footer Content Section */}
       <section
         className="relative w-full h-64 overflow-hidden"
-        style={{ backgroundImage: "url(/xdf.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url(/images/xdf.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="flex h-full relative z-10">
           {/* Left Slide - Homelogy Branding */}
           <div className="w-1/2 flex items-center justify-start p-8 relative group">
-            <Image src="/images/logo-hm-cokelat.png" alt="Homelogy" width={220} height={64} className="max-h-16 w-auto ml-4" />
+            <Image
+              src="/images/logo-hm-cokelat.png"
+              alt="Homelogy"
+              width={220}
+              height={64}
+              className="max-h-16 w-auto ml-4"
+              quality={80}
+            />
           </div>
 
           {/* Right Slide - Address and Navigation Links */}
           <div className="w-1/2 flex items-center px-12 py-8 gap-16">
-            {/* Left side - Contact Information */}
             <div className="space-y-3 flex-shrink-0">
               <p className="text-sm text-gray-800 font-medium leading-relaxed">
                 JAKARTA DESIGN CENTER 3RD FLOOR,
@@ -128,29 +116,16 @@ export function FooterSection() {
               </div>
             </div>
 
-            {/* Right side - Navigation Links */}
             <div className="grid grid-cols-2 gap-8 ml-auto">
               <div className="space-y-2">
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors">
-                  Products
-                </a>
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">
-                  Legacy
-                </a>
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">
-                  Blogs
-                </a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors">Products</a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">Legacy</a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">Blogs</a>
               </div>
               <div className="space-y-2">
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors">
-                  Brands
-                </a>
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">
-                  Privilege
-                </a>
-                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">
-                  Contact
-                </a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors">Brands</a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">Privilege</a>
+                <a href="#" className="text-sm text-gray-800 hover:text-amber-600 transition-colors block">Contact</a>
               </div>
             </div>
           </div>
@@ -161,7 +136,7 @@ export function FooterSection() {
       <section
         className="relative py-8 px-8 border-t border-amber-700"
         style={{
-          backgroundImage: "url(/xdf.jpg)",
+          backgroundImage: "url(/images/xdf.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -170,34 +145,16 @@ export function FooterSection() {
           <div className="flex items-center justify-between">
             <p className="text-sm text-amber-800 font-medium">Copyright © 2025 HOMELOGY, ALL RIGHTS RESERVED</p>
             <div className="flex items-center gap-4">
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="w-5 h-5 text-amber-800 hover:text-amber-700 transition-colors"
-              >
-                <Instagram className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                aria-label="WhatsApp"
-                className="w-5 h-5 text-amber-800 hover:text-amber-700 transition-colors"
-              >
-                <MessageCircle className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="w-5 h-5 text-amber-800 hover:text-amber-700 transition-colors"
-              >
-                <Facebook className="w-full h-full" />
-              </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="w-5 h-5 text-amber-800 hover:text-amber-700 transition-colors"
-              >
-                <Linkedin className="w-full h-full" />
-              </a>
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-5 h-5 text-amber-800 hover:text-amber-700 transition-colors"
+                >
+                  <Icon className="w-full h-full" />
+                </a>
+              ))}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -36,88 +36,130 @@ const slides = [
 
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const startTimer = () => {
+    timerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+  }
+
+  const pauseTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+  }
+
+  const resumeTimer = () => {
+    pauseTimer()
+    startTimer()
+  }
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000) // Change slide every 5 seconds
-
-    return () => clearInterval(timer)
+    startTimer()
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [])
 
   const nextSlide = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setCurrentSlide((prev) => (prev + 1) % slides.length)
+    resumeTimer()
+    setTimeout(() => setIsTransitioning(false), 700)
   }
 
   const prevSlide = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    resumeTimer()
+    setTimeout(() => setIsTransitioning(false), 700)
   }
 
   const goToSlide = (index: number) => {
+    if (isTransitioning || index === currentSlide) return
+    setIsTransitioning(true)
     setCurrentSlide(index)
+    resumeTimer()
+    setTimeout(() => setIsTransitioning(false), 700)
   }
 
+  const activeSlide = slides[currentSlide]
+  const nextIndex = (currentSlide + 1) % slides.length
+
   return (
-    <div className="relative h-screen w-full overflow-hidden" data-scroll-section>
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-700 will-change-[opacity] ${
-            index === currentSlide ? "opacity-100 visible z-10" : "opacity-0 invisible z-0"
-          }`}
-        >
-          {/* Background Image */}
-          <div className="absolute inset-0 transform-gpu">
-            <Image
-              src={slide.image || "/placeholder.svg"}
-              alt={slide.title || `Home slide ${index + 1}`}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-          </div>
+    <div
+      className="relative h-screen w-full overflow-hidden"
+      data-scroll-section
+      onMouseEnter={pauseTimer}
+      onMouseLeave={resumeTimer}
+    >
+      {/* ═══ ACTIVE SLIDE IMAGE ONLY (prevents 4× image load) ═══ */}
+      <div className="absolute inset-0">
+        <Image
+          src={activeSlide.image || "/placeholder.svg"}
+          alt={activeSlide.title || `Home slide ${currentSlide + 1}`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          quality={80}
+          key={`active-${currentSlide}`}
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
 
-          {/* Content */}
-          <div className="relative z-10 flex h-full items-center justify-center">
-            <div className="text-center px-4">
-              {slide.tag && <p className="text-white/90 text-sm md:text-base mb-4 tracking-wider">{slide.tag}</p>}
-              <h1
-                className={`font-light text-white mb-2 tracking-tight ${
-                  slide.title === "Furniture with Living Philosophy"
-                    ? "text-3xl md:text-5xl lg:text-6xl"
-                    : "text-4xl md:text-6xl lg:text-7xl"
-                }`}
-              >
-                <span
-                  style={{
-                    fontFamily: '"Adobe Garamond Pro", Garamond',
-                    fontWeight: 400,
-                    fontStyle: "normal",
-                  }}
-                >
-                  {slide.title}
-                </span>{" "}
-                {slide.subtitle}
-              </h1>
-              <p className="text-white/80 text-base md:text-lg mt-6 max-w-2xl mx-auto leading-relaxed">
-                {slide.description}
-              </p>
-            </div>
-          </div>
-
-          {/* Scroll Indicator - only on first slide */}
-          {index === 0 && (
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-              <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-                <div className="w-1.5 h-1.5 bg-white/70 rounded-full" />
-              </div>
-            </div>
+      {/* ═══ CONTENT ═══ */}
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <div className="text-center px-4">
+          {activeSlide.tag && (
+            <p className="text-white/90 text-sm md:text-base mb-4 tracking-wider">
+              {activeSlide.tag}
+            </p>
           )}
+          <h1
+            className={`font-light text-white mb-2 tracking-tight ${
+              activeSlide.title === "Furniture with Living Philosophy"
+                ? "text-3xl md:text-5xl lg:text-6xl"
+                : "text-4xl md:text-6xl lg:text-7xl"
+            }`}
+          >
+            <span
+              style={{
+                fontFamily: '"Adobe Garamond Pro", Garamond',
+                fontWeight: 400,
+                fontStyle: "normal",
+              }}
+            >
+              {activeSlide.title}
+            </span>{" "}
+            {activeSlide.subtitle}
+          </h1>
+          <p className="text-white/80 text-base md:text-lg mt-6 max-w-2xl mx-auto leading-relaxed">
+            {activeSlide.description}
+          </p>
         </div>
-      ))}
+      </div>
+
+      {/* ═══ PRELOAD NEXT SLIDE (hidden, loads in background) ═══ */}
+      <div className="hidden" aria-hidden="true">
+        <Image
+          src={slides[nextIndex].image}
+          alt=""
+          fill
+          sizes="0px"
+          quality={60}
+          priority={false}
+        />
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-20">
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
+          <div className="w-1.5 h-1.5 bg-white/70 rounded-full" />
+        </div>
+      </div>
 
       {/* Navigation Arrows */}
       <Button

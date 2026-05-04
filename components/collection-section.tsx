@@ -34,7 +34,6 @@ export function CollectionSection() {
       style={{ backgroundImage: "url(/images/xdf.jpg)", minHeight: "105vh" }}
     >
       <div className="w-full relative z-10">
-        {/* Grid of collections */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-6">
           {collections.map((collection) => (
             <Link
@@ -42,7 +41,6 @@ export function CollectionSection() {
               href={`/products/category/${collection.slug}`}
               className="group relative aspect-[3/5] overflow-hidden"
             >
-              {/* Background image */}
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-110">
                 <Image
                   src={collection.image || "/placeholder.svg"}
@@ -50,18 +48,19 @@ export function CollectionSection() {
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover object-center"
+                  quality={75}
                 />
               </div>
 
-              {/* Title */}
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                <h3 className="font-light text-white text-lg md:text-xl lg:text-2xl">{collection.title}</h3>
+                <h3 className="font-light text-white text-lg md:text-xl lg:text-2xl">
+                  {collection.title}
+                </h3>
               </div>
             </Link>
           ))}
         </div>
 
-        {/* View all button */}
         <div className="mt-8 md:mt-12 flex justify-center">
           <Link
             href="/products/category/all"

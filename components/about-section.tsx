@@ -28,13 +28,10 @@ export function AboutSection() {
           priority
           sizes="100vw"
           className="object-cover object-center"
+          quality={75}
         />
       </div>
-      {/* Content Grid: 1 kolom di mobile, 2 kolom di md (tablet/web) */}
       <div className="relative grid grid-cols-1 md:grid-cols-2 min-h-screen">
-        
-        {/* Left Column - Text Content */}
-        {/* Ditambahkan bg-white/80 md:bg-transparent agar teks mudah dibaca di mobile */}
         <motion.div
           className="flex items-center justify-center p-6 sm:p-10 md:p-16 lg:p-20 bg-white/80 md:bg-transparent"
           initial="hidden"
@@ -50,26 +47,22 @@ export function AboutSection() {
               About Us
             </motion.h2>
 
-            <motion.div
-              className="space-y-4"
-              variants={itemVariants}
-            >
-              {/* Diganti justify-between menjadi text-justify agar teks rata kiri-kanan */}
+            <motion.div className="space-y-4" variants={itemVariants}>
               <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
-               Homelogy Style is a furniture brand defined by refined design and material excellence. Each collection is developed with a focus on proportion, form, and craftsmanship, creating pieces that 
-               bring presence and elegance into contemporary interiors.
+                Homelogy Style is a furniture brand defined by refined design and material excellence. Each
+                collection is developed with a focus on proportion, form, and craftsmanship, creating pieces
+                that bring presence and elegance into contemporary interiors.
               </p>
 
               <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
-                Rooted in a design philosophy that values detail and material expression, Homelogy Style 
-                presents furniture that complements sophisticated living environments. Every piece reflects 
+                Rooted in a design philosophy that values detail and material expression, Homelogy Style
+                presents furniture that complements sophisticated living environments. Every piece reflects
                 a commitment to quality, thoughtful design, and enduring aesthetics.
               </p>
-              
-              {/* Paragraf dipisah agar jarak enter-nya teraplikasikan dengan baik */}
+
               <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
-                Through its collections, Homelogy Style offers furniture that shapes spaces with character, refinement, and
-                a distinctive design identity.
+                Through its collections, Homelogy Style offers furniture that shapes spaces with character,
+                refinement, and a distinctive design identity.
               </p>
             </motion.div>
 
@@ -83,11 +76,7 @@ export function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Right Column - Image from background visible */}
-        {/* Disembunyikan di mobile agar tidak memunculkan ruang kosong memanjang ke bawah */}
-        <div className="hidden md:block">
-          {/* This column is transparent to show the background image */}
-        </div>
+        <div className="hidden md:block" />
       </div>
     </section>
   )
