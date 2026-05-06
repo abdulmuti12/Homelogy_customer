@@ -5,41 +5,50 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const slides = [
-  {
-    image: "/images/slide-1.png",
-    title: "Furniture with Living Philosophy",
-    subtitle: "",
-    description: "",
-  },
-  {
-    image: "/images/Home_Slide_2.jpg",
-    title: "",
-    subtitle: " ",
-    description: " ",
-    tag: "",
-  },
-  {
-    image: "/images/slide3.jpeg",
-    title: "",
-    subtitle: " ",
-    description: " ",
-    tag: "",
-  },
-  {
-    image: "/images/Home_Slide_4.jpeg",
-    title: "Modern",
-    subtitle: " ",
-    description: " ",
-  },
-]
+interface Slide {
+  image: string
+  title: string
+  subtitle?: string
+  description: string
+  tag?: string
+}
+
+const API_URL = process.env.NEXT_PUBLIC_HOME_BANNER_API_URL || "https://homelogystyle.com/api/home-banner"
 
 export function HeroSlider() {
+  const [slides, setSlides] = useState<Slide[]>([])
+  const [loading, setLoading] = useState(true)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  // Fetch slides from API
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const res = await fetch(API_URL)
+        const json = await res.json()
+        if (json.success && json.data) {
+          const mappedSlides: Slide[] = json.data.map((item: { src: string; title: string; description: string; subtitle?: string; alt?: string; tag?: string }) => ({
+            image: item.src,
+            title: item.title || "",
+            subtitle: item.subtitle || "",
+            description: item.description || "",
+            tag: item.tag || "",
+          }))
+          setSlides(mappedSlides)
+        }
+      } catch (err) {
+        console.error("Failed to fetch slides:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchSlides()
+  }, [])
+
   const startTimer = () => {
+    if (slides.length === 0) return
     timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
@@ -55,14 +64,16 @@ export function HeroSlider() {
   }
 
   useEffect(() => {
-    startTimer()
+    if (slides.length > 0) {
+      startTimer()
+    }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [])
+  }, [slides])
 
   const nextSlide = () => {
-    if (isTransitioning) return
+    if (isTransitioning || slides.length === 0) return
     setIsTransitioning(true)
     setCurrentSlide((prev) => (prev + 1) % slides.length)
     resumeTimer()
@@ -70,7 +81,7 @@ export function HeroSlider() {
   }
 
   const prevSlide = () => {
-    if (isTransitioning) return
+    if (isTransitioning || slides.length === 0) return
     setIsTransitioning(true)
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
     resumeTimer()
@@ -83,6 +94,14 @@ export function HeroSlider() {
     setCurrentSlide(index)
     resumeTimer()
     setTimeout(() => setIsTransitioning(false), 700)
+  }
+
+  if (loading || slides.length === 0) {
+    return (
+      <div className="relative h-screen w-full bg-neutral-200 flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-neutral-400 border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
   }
 
   const activeSlide = slides[currentSlide]
