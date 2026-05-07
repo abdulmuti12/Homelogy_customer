@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${playfair.variable} font-sans antialiased bg-black min-h-screen flex flex-col`}>
+      <body className={`${playfair.variable} font-sans antialiased bg-black min-h-screen flex flex-col`} suppressHydrationWarning>
         {children}
         <Analytics />
       </body>
