@@ -48,6 +48,7 @@ export function CatalogSection() {
               className={`font-light text-4xl md:text-5xl lg:text-6xl text-amber-800 mb-6 text-balance transition-all duration-700 ease-out ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
+              style={{ fontFamily: '"Adobe Garamond Pro", Garamond, serif', fontWeight: 400 }}
             >
               Our Catalog
             </h2>
@@ -57,6 +58,7 @@ export function CatalogSection() {
                 className={`text-amber-700 text-lg md:text-xl font-light transition-all duration-700 ease-out delay-100 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
+                style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
               >
                 Discover the latest expression of Modern Living Unveiling Homelogy's Essential Collection
               </p>
@@ -65,6 +67,8 @@ export function CatalogSection() {
                 className={`text-gray-700 text-base md:text-lg leading-relaxed transition-all duration-700 ease-out delay-150 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                 }`}
+                                style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+
               >
                 This edition is crafted to elevate your experience, guiding you effortlessly through our
                 collections and showcasing the refined pieces that embody Homelogy's modern living philosophy.
@@ -83,8 +87,10 @@ export function CatalogSection() {
                 <span className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-amber-700/40 transition-all group-hover:border-amber-700 group-hover:bg-amber-700/5">
                   <Download className="h-5 w-5 text-amber-700" />
                 </span>
-                <span className="hidden sm:inline">DOWNLOAD NOW</span>
-                <span className="sm:hidden">DOWNLOAD</span>
+                <span className="hidden sm:inline"                 style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+>DOWNLOAD NOW</span>
+                <span className="sm:hidden"                 style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+>DOWNLOAD</span>
               </Link>
 
               <Link
@@ -94,8 +100,10 @@ export function CatalogSection() {
                 <span className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-amber-700/40 transition-all group-hover:border-amber-700 group-hover:bg-amber-700/5">
                   <ArrowRight className="h-5 w-5 text-amber-700" />
                 </span>
-                <span className="hidden sm:inline">VIEW MORE CATALOGUE</span>
-                <span className="sm:hidden">VIEW MORE</span>
+                <span className="hidden sm:inline"                 style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+>VIEW MORE CATALOGUE</span>
+                <span className="sm:hidden"                 style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+>VIEW MORE</span>
               </Link>
             </div>
           </div>

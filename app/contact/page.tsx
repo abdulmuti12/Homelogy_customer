@@ -41,7 +41,15 @@ export default function ContactPage() {
       <SiteHeader />
 
       {/* Container utama untuk efek Magnetic/Snap */}
-      <div className="h-screen overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth" style={{ scrollPaddingTop: '0', scrollBehavior: 'smooth' }}>
+      <div
+        className="h-screen overflow-y-auto no-scrollbar snap-y snap-mandatory scroll-smooth"
+        style={{
+          scrollPaddingTop: "0",
+          scrollBehavior: "smooth",
+          fontFamily: '"Din Pro", "Din_Pro"',
+          fontWeight: 400,
+        }}
+      >
         
         <div className="snap-start min-h-screen">
           <section
@@ -56,14 +64,14 @@ export default function ContactPage() {
           >
             <div className="absolute inset-0 bg-black/20"></div>
 
-            <div className="absolute bottom-6 left-6 z-20 text-white/80 text-sm font-light tracking-wide">
+            <div className="absolute bottom-6 left-6 z-20 text-white/80 text-sm tracking-wide">
               © HOMELOGY, 2025
             </div>
 
             <div className="relative z-10 w-full">
               <div className="flex items-start gap-8">
                 <motion.h1
-                  className="font-light text-5xl md:text-6xl lg:text-7xl text-white font-serif leading-tight whitespace-nowrap flex-1 pt-0"
+                  className="text-5xl md:text-6xl lg:text-7xl text-white leading-tight whitespace-nowrap flex-1 pt-0"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7 }}
@@ -81,7 +89,11 @@ export default function ContactPage() {
                 >
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                      <label htmlFor="nama" className="text-amber-800 text-sm tracking-wide block">
+                      <label htmlFor="nama" className="text-amber-800 text-sm tracking-wide block"
+                        style={{
+          fontFamily: '"Din Pro", "Din_Pro"',
+        }}
+                      >
                         Nama
                       </label>
                       <input
@@ -96,7 +108,11 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-amber-800 text-sm tracking-wide block">
+                      <label htmlFor="email" className="text-amber-800 text-sm tracking-wide block"
+                               style={{
+          fontFamily: '"Din Pro", "Din_Pro"',
+        }}
+                      >
                         Email*
                       </label>
                       <input
@@ -111,7 +127,11 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-amber-800 text-sm tracking-wide block">
+                      <label htmlFor="phone" className="text-amber-800 text-sm tracking-wide block"
+                               style={{
+          fontFamily: '"Din Pro", "Din_Pro"',
+        }}
+                      >
                         Phone*
                       </label>
                       <input
@@ -126,7 +146,11 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="message" className="text-amber-800 text-sm tracking-wide block">
+                      <label htmlFor="message" className="text-amber-800 text-sm tracking-wide block"
+                               style={{
+          fontFamily: '"Din Pro", "Din_Pro"',
+        }}
+                      >
                         Message
                       </label>
                       <textarea
@@ -143,7 +167,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="text-amber-800 hover:text-amber-900 font-light tracking-widest text-sm transition-colors disabled:opacity-50"
+                        className="text-amber-800 hover:text-amber-900 tracking-widest text-sm transition-colors disabled:opacity-50"
                       >
                         {isSubmitting ? "SENDING..." : "SEND"}
                       </button>

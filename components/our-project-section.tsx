@@ -221,6 +221,7 @@ export function OurProjectSection() {
           <Link
             href="/projects"
             className="group inline-flex items-center gap-2 text-amber-700 text-xs md:text-sm tracking-wider uppercase hover:text-amber-800 transition-colors"
+            style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
           >
             LOAD MORE
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-700/30 transition-all group-hover:border-amber-700/50 group-hover:translate-x-1">

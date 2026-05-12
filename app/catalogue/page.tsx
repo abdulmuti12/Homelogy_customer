@@ -48,6 +48,8 @@ export default function CataloguePage() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
+          fontWeight: 400,
         }}
       >
         <Breadcrumb>
@@ -72,11 +74,13 @@ export default function CataloguePage() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
+          fontWeight: 400,
         }}
       >
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
-          <h1 className="font-light text-4xl md:text-5xl lg:text-6xl text-amber-900 mb-16 font-serif text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-amber-900 mb-16 text-center md:text-left">
             Our Catalog
           </h1>
 
