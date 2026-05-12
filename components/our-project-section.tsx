@@ -113,12 +113,12 @@ export function OurProjectSection() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2
-            className="font-light text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
-            style={{ marginTop: "1cm" }}
+            className="text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
+            style={{ marginTop: "1cm", fontFamily: "\"Adobe Garamond Pro\", Garamond", fontWeight: 400 }}
           >
             Our Project
           </h2>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify" style={{ fontFamily: "\"Din Pro\", \"Din_Pro\"", fontWeight: 400 }}>
             <span className="block">
               Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
             {/* </span>

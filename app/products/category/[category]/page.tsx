@@ -280,7 +280,12 @@ export default function CategoryPage() {
 
             {/* Right: Description */}
             <div className="lg:w-2/3 flex flex-col justify-start">
-              <p className="text-gray-700 text-sm leading-relaxed">{categoryInfo.description}</p>
+              <p
+                className="text-gray-700 text-base md:text-lg leading-relaxed"
+                style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+              >
+                {categoryInfo.description}
+              </p>
             </div>
           </div>
 
@@ -301,12 +306,18 @@ export default function CategoryPage() {
               {/* Color Filter */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                  <button
+                    className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+                    style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                  >
                     <span className="text-sm">Color : {selectedColor}</span>
                     <ChevronDown size={16} />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="max-h-64 overflow-y-auto">
+                <DropdownMenuContent
+                  className="max-h-64 overflow-y-auto"
+                  style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                >
                   <DropdownMenuItem onClick={() => setSelectedColor("All")}>All</DropdownMenuItem>
                   {COLOR_OPTIONS.map((color) => (
                     <DropdownMenuItem
@@ -322,12 +333,15 @@ export default function CategoryPage() {
             {/* Category Filter */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                <button
+                  className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+                  style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                >
                   <span className="text-sm">Category : {selectedCategory}</span>
                   <ChevronDown size={16} />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>
                 <DropdownMenuItem onClick={() => setSelectedCategory("All")}>All</DropdownMenuItem>
                 {categoriesLoading ? (
                   <DropdownMenuItem disabled>Loading...</DropdownMenuItem>
@@ -349,12 +363,15 @@ export default function CategoryPage() {
               {/* Sort by Filter */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                  <button
+                    className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+                    style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                  >
                     <span className="text-sm">Sort by</span>
                     <ChevronDown size={16} />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>
                   <DropdownMenuItem>Newest</DropdownMenuItem>
                   <DropdownMenuItem>Price: Low to High</DropdownMenuItem>
                   <DropdownMenuItem>Price: High to Low</DropdownMenuItem>
@@ -400,8 +417,18 @@ export default function CategoryPage() {
                   </div>
 
                   <div className="text-center">
-                    <h3 className="text-gray-900 font-medium text-sm md:text-base">{product.name}</h3>
-                    <p className="text-gray-600 text-xs md:text-sm">{product.product_type || product.category}</p>
+                    <h3
+                      className="text-gray-900 text-sm md:text-base"
+                      style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 500 }}
+                    >
+                      {product.name}
+                    </h3>
+                    <p
+                      className="text-gray-600 text-xs md:text-sm"
+                      style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                    >
+                      {product.product_type || product.category}
+                    </p>
                   </div>
                 </Link>
               ))}

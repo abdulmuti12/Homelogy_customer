@@ -38,7 +38,11 @@ export function FooterSection() {
   return (
     <footer className="w-full">
       {/* Video Carousel Section */}
-      <section className="relative w-full h-96 bg-black overflow-hidden">
+      <section className="relative w-full h-96 bg-black overflow-hidden"  style={{
+                fontFamily: '"Adobe Garamond Pro", Garamond',
+                // fontWeight: 400,
+                fontStyle: "normal",
+              }}>
         <div className="flex h-full">
           {/* Left Side - Showroom Image */}
           <div className="w-1/2 relative group overflow-hidden">
@@ -65,8 +69,12 @@ export function FooterSection() {
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all" />
 
-            <div className="relative h-full flex flex-col items-center justify-center text-white gap-8">
-              <h3 className="text-4xl font-serif text-center">Experience Luxury Here</h3>
+            <div className="relative h-full flex flex-col items-center justify-center text-white gap-8" style={{
+                fontFamily: '"Adobe Garamond Pro", Garamond',
+                // fontWeight: 400,
+                fontStyle: "normal",
+              }}>
+              <h3 className="text-4xl font-serif text-center">Experience Luxury</h3>
               <a
                 href="https://www.google.com/maps/place/Jakarta+Design+Center/@-6.2017185,106.7982548,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69f6bc1715d631:0xac5785593356cd5d!8m2!3d-6.2017185!4d106.8008297!16s%2Fg%2F1trs_9wl?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
@@ -99,7 +107,11 @@ export function FooterSection() {
           </div>
 
           {/* Right Slide - Address and Navigation Links */}
-          <div className="w-1/2 flex items-center px-12 py-8 gap-16">
+          <div className="w-1/2 flex items-center px-12 py-8 gap-16"  style={{
+                fontFamily: '"Adobe Garamond Pro", Garamond',
+                fontWeight: 400,
+                fontStyle: "normal",
+              }}>
             <div className="space-y-3 flex-shrink-0">
               <p className="text-sm text-gray-800 font-medium leading-relaxed">
                 JAKARTA DESIGN CENTER 3RD FLOOR,
@@ -139,8 +151,13 @@ export function FooterSection() {
           backgroundImage: "url(/images/xdf.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          fontFamily: '"Adobe Garamond Pro", Garamond',
+          fontWeight: 400,
+          fontStyle: "normal",
+
         }}
       >
+        
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex items-center justify-between">
             <p className="text-sm text-amber-800 font-medium">Copyright © 2025 HOMELOGY, ALL RIGHTS RESERVED</p>

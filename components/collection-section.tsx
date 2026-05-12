@@ -31,7 +31,12 @@ export function CollectionSection() {
   return (
     <section
       className="flex flex-col justify-center bg-cover bg-top relative py-20"
-      style={{ backgroundImage: "url(/images/xdf.jpg)", minHeight: "105vh" }}
+      style={{
+        backgroundImage: "url(/images/xdf.jpg)",
+        minHeight: "105vh",
+        fontFamily: '"Din Pro", "Din_Pro"',
+        fontWeight: 400,
+      }}
     >
       <div className="w-full relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-6">

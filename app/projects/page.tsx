@@ -31,7 +31,7 @@ interface ApiResponse {
   }
 }
 
-const filterOptions = ["All", "Residential", "Office", "Others"]
+const filterOptions = ["All", "Residentials", "Office", "Others"]
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://homelogystyle.com/api"
 
@@ -125,7 +125,10 @@ export default function ProjectsPage() {
                 {/* Header Row */}
                 <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 mb-12 md:mb-16">
                   <div className="w-full xl:w-3/5">
-                    <h1 className="font-light text-[clamp(2.25rem,4.8vw,5rem)] text-amber-900 font-serif mb-5 md:mb-6 leading-tight">
+                    <h1
+                      className="text-[clamp(2.25rem,4.8vw,5rem)] text-amber-900 mb-5 md:mb-6 leading-tight"
+                      style={{ fontFamily: '"Adobe Garamond Pro", Garamond, serif', fontWeight: 400 }}
+                    >
                       Our Project
                     </h1>
                     <p className="text-gray-700 text-sm md:text-base 2xl:text-lg leading-relaxed max-w-4xl">
@@ -200,10 +203,18 @@ export default function ProjectsPage() {
                             </div>
                           </div>
                           <div className="space-y-1">
-                            <h3 className="text-gray-900 font-medium text-base md:text-lg 2xl:text-xl">
+                            <h3
+                              className="text-gray-900 text-base md:text-lg 2xl:text-xl"
+                              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                            >
                               {project.name}
                             </h3>
-                            <p className="text-gray-600 text-sm 2xl:text-base">{project.architect}</p>
+                            <p
+                              className="text-gray-600 text-sm 2xl:text-base"
+                              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                            >
+                              {project.architect}
+                            </p>
                           </div>
                         </Link>
                       ))}

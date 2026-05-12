@@ -23,7 +23,8 @@ export function WhoWeAre() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h2
-              className="text-4xl md:text-5xl font-serif text-amber-900"
+              className="text-4xl md:text-5xl text-amber-900"
+              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -33,7 +34,8 @@ export function WhoWeAre() {
             </motion.h2>
 
             <motion.div
-              className="space-y-4 text-gray-700 font-serif text-base md:text-lg leading-relaxed"
+              className="space-y-4 text-gray-700 text-base md:text-lg leading-relaxed"
+              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}

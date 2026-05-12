@@ -42,25 +42,26 @@ export function AboutSection() {
           <div className="max-w-xl w-full space-y-6">
             <motion.h2
               className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#A66B4F]"
+              style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond, serif' }}
               variants={itemVariants}
             >
-              About Us
+              About us
             </motion.h2>
 
             <motion.div className="space-y-4" variants={itemVariants}>
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
+              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
                 Homelogy Style is a furniture brand defined by refined design and material excellence. Each
                 collection is developed with a focus on proportion, form, and craftsmanship, creating pieces
                 that bring presence and elegance into contemporary interiors.
               </p>
 
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
+              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
                 Rooted in a design philosophy that values detail and material expression, Homelogy Style
                 presents furniture that complements sophisticated living environments. Every piece reflects
                 a commitment to quality, thoughtful design, and enduring aesthetics.
               </p>
 
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify">
+              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
                 Through its collections, Homelogy Style offers furniture that shapes spaces with character,
                 refinement, and a distinctive design identity.
               </p>
@@ -68,7 +69,7 @@ export function AboutSection() {
 
             <motion.a
               href="/about"
-              className="inline-block text-[#2C2C2C] font-semibold text-base md:text-lg hover:text-[#A66B4F] transition-colors"
+              className="inline-block text-[#2C2C2C] font-['Din_Pro'] font-bold text-base md:text-lg hover:text-[#A66B4F] transition-colors"
               variants={itemVariants}
             >
               Learn More {">>"}

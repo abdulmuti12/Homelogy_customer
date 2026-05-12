@@ -22,7 +22,7 @@ export function OurClients() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-5xl font-serif text-amber-900 font-light">Our Clients</h2>
+          <h2 className="text-5xl text-amber-900" style={{ fontFamily: '"Adobe Garamond Pro", Garamond, serif', fontWeight: 400 }}>Our Clients</h2>
         </motion.div>
 
         <div className="flex justify-center">

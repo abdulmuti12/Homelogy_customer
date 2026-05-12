@@ -28,14 +28,14 @@ export function AboutHero() {
               className="
                 text-white/80
                 text-3xl md:text-4xl lg:text-5xl xl:text-6xl
-                font-light
                 tracking-widest
               "
+              style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              About Us
+              About us
             </motion.div>
             <motion.div
               className="w-64 h-px bg-white/40 -mt-2"
@@ -46,7 +46,8 @@ export function AboutHero() {
 
             {/* Main Heading */}
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight text-balance"
+              className="text-4xl md:text-5xl lg:text-6xl text-white leading-tight text-balance"
+              style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
@@ -56,7 +57,8 @@ export function AboutHero() {
 
             {/* Description Text */}
             <motion.p
-              className="text-base md:text-lg text-white/90 leading-relaxed max-w-md font-light"
+              className="text-base md:text-lg text-white/90 leading-relaxed max-w-md"
+              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
