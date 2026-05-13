@@ -282,7 +282,7 @@ export default function CategoryPage() {
             <div className="lg:w-2/3 flex flex-col justify-start">
               <p
                 className="text-gray-700 text-base md:text-lg leading-relaxed"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+                style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
               >
                 {categoryInfo.description}
               </p>
@@ -419,7 +419,7 @@ export default function CategoryPage() {
                   <div className="text-center">
                     <h3
                       className="text-gray-900 text-sm md:text-base"
-                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 500 }}
+                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                     >
                       {product.name}
                     </h3>

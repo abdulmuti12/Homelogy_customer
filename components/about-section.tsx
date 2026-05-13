@@ -51,7 +51,7 @@ export function AboutSection() {
             <motion.div className="space-y-4" variants={itemVariants}>
               <p
                 className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+                style={{ fontFamily: '"Din_Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
               >
                 Homelogy Style is a furniture brand defined by refined design and material excellence. Each
                 collection is developed with a focus on proportion, form, and craftsmanship, creating pieces
@@ -60,7 +60,7 @@ export function AboutSection() {
 
               <p
                 className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}
               >
                 Rooted in a design philosophy that values detail and material expression, Homelogy Style
                 presents furniture that complements sophisticated living environments. Every piece reflects
@@ -69,7 +69,7 @@ export function AboutSection() {
 
               <p
                 className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}
               >
                 Through its collections, Homelogy Style offers furniture that shapes spaces with character,
                 refinement, and a distinctive design identity.

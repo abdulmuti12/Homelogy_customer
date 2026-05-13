@@ -359,7 +359,7 @@ export default function ProductsPage() {
                       <div className="text-center">
                         <h3
                           className="text-gray-900 text-sm md:text-base"
-                          style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 500 }}
+                          style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                         >
                           {product.name}
                         </h3>

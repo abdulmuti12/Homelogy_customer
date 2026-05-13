@@ -19,7 +19,8 @@ export const metadata: Metadata = {
   generator: "v0.app",
   icons: {
     icon: "/homelogy_fav.png",
-    apple: "/homelogy_fav.png",
+    shortcut: "/homelogy_fav.png",
+    apple: "/apple-icon.png",
   },
 }
 
@@ -30,6 +31,52 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
+      <head>
+        <style>{`
+          @font-face {
+            font-family: "Din Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Din_Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Din Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Din_Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Din Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "Din_Pro";
+            src: url("/fonts/dinpro.otf") format("opentype");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+          }
+        `}</style>
+      </head>
       <body className={`${playfair.variable} font-sans antialiased bg-black min-h-screen flex flex-col`} suppressHydrationWarning>
         {children}
         <Analytics />
