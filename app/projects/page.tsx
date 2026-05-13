@@ -127,12 +127,12 @@ export default function ProjectsPage() {
                   <div className="w-full xl:w-3/5">
                     <h1
                       className="text-[clamp(2.25rem,4.8vw,5rem)] text-amber-900 mb-5 md:mb-6 leading-tight"
-                      style={{ fontFamily: '"Adobe Garamond Pro", Garamond, serif', fontWeight: 400 }}
+                      style={{ fontFamily: '"Adobe Garamond Pro", Garamond', fontWeight: 400 }}
                     >
                       Our Project
                     </h1>
                     <p className="text-gray-700 text-sm md:text-base 2xl:text-lg leading-relaxed max-w-4xl">
-                      <span className="block">
+                      <span className="block"                 style={{ fontFamily: '"Din Pro", "Din_Pro"'}}>
                         Homelogy Style furniture is featured in a range of residential environments where
                         design and lifestyle come together. Each project highlights the presence of carefully
                         designed furniture pieces that shape the atmosphere of a space.

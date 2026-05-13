@@ -143,7 +143,10 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100">
+    <main
+      className="min-h-screen bg-gray-100"
+      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+    >
       <SiteHeader />
 
       <section className="px-6 md:px-12 lg:px-20 py-12 md:py-20">
@@ -151,19 +154,22 @@ export default function ProjectDetailPage() {
           {/* Back Button */}
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-gray-700 hover:text-gray-900 mb-12 group"
+            className="inline-flex items-center gap-2 text-gray-700 hover:text-gray-900 mt-4 mb-12 group"
           >
             <div className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-gray-100 transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </div>
-            <span className="text-sm font-light tracking-wide uppercase">Back to Projects</span>
+            <span className="text-sm tracking-wide uppercase">Back to Projects</span>
           </button>
 
           {/* Main Content: Left Info + Right Image */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* Left: Project Info */}
             <div className="flex flex-col justify-start">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8 font-serif">
+              <h1
+                className="text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-8"
+                style={{ fontFamily: '"Adobe Garamond Pro", Garamond, serif', fontWeight: 400 }}
+              >
                 {project.name}
               </h1>
 
@@ -175,14 +181,19 @@ export default function ProjectDetailPage() {
                   { label: "Photo", value: project.photo_created },
                 ].map(({ label, value }) => (
                   <div key={label} className="grid grid-cols-[110px_12px_1fr] items-start">
-                    <span className="text-gray-600 font-light">{label}</span>
+                    <span className="text-gray-600">{label}</span>
                     <span className="text-gray-900">:</span>
                     <span className="text-gray-900">{value}</span>
                   </div>
                 ))}
               </div>
 
-              <p className="text-gray-700 text-sm leading-relaxed font-light">{project.description}</p>
+              <p
+                className="text-gray-700 text-sm leading-relaxed"
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              >
+                {project.description}
+              </p>
             </div>
 
             {/* Right: Main Image with Navigation */}
