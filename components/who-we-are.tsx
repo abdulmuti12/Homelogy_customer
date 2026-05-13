@@ -12,11 +12,22 @@ export function WhoWeAre() {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full h-full flex items-center px-4">
+      <div className="w-full h-full flex items-center px-4 md:pt-0 py-12 md:py-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center w-full max-w-6xl mx-auto">
-          {/* Left side - Text content */}
+          {/* Right side - Image (mobile: first, desktop: right) */}
           <motion.div
-            className="space-y-6 ml-0 md:ml-8 lg:ml-12"
+            className="flex justify-center md:justify-end order-first md:order-last"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <img src="/Image-Who-We-Us.jpg" alt="Who We Are team" className="w-full max-w-md rounded-lg object-cover" />
+          </motion.div>
+
+          {/* Left side - Text content (mobile: below, desktop: left) */}
+          <motion.div
+            className="space-y-6 ml-0 md:ml-8 lg:ml-12 order-last md:order-first"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
@@ -24,7 +35,7 @@ export function WhoWeAre() {
           >
             <motion.h2
               className="text-4xl md:text-5xl text-amber-900"
-              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -55,17 +66,6 @@ export function WhoWeAre() {
                 on contemporary living.
               </p>
             </motion.div>
-          </motion.div>
-
-          {/* Right side - Image */}
-          <motion.div
-            className="flex justify-center md:justify-end"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <img src="/Image-Who-We-Us.jpg" alt="Who We Are team" className="w-full max-w-md rounded-lg object-cover" />
           </motion.div>
         </div>
       </div>

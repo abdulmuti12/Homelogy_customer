@@ -34,7 +34,7 @@ export function CollectionSection() {
       style={{
         backgroundImage: "url(/images/xdf.jpg)",
         minHeight: "105vh",
-        fontFamily: '"Din Pro", "Din_Pro"',
+        fontFamily: '"Din Pro", "Din_Pro", sans-serif',
         fontWeight: 400,
       }}
     >

@@ -196,7 +196,7 @@ export default function PressPage() {
                           </h3>
 
                           {/* description - Line Clamp 3 */}
-                          <p className="text-xs sm:text-sm font-light leading-relaxed text-gray-300 mb-5 flex-grow line-clamp-3" style={{ fontFamily: '"Din Pro", "Din_Pro"' }}>
+                          <p className="text-xs sm:text-sm font-light leading-relaxed text-gray-300 mb-5 flex-grow line-clamp-3" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
                             {stripHtml(release.description)}
                           </p>
 

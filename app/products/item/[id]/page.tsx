@@ -248,7 +248,7 @@ export default function ProductDetailPage() {
               <div className="text-center mb-4">
                 <h1
                   className="text-3xl md:text-4xl text-gray-900 mb-1 leading-none"
-                  style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                  style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                 >
                   {product.name}
                 </h1>
@@ -257,34 +257,34 @@ export default function ProductDetailPage() {
 
               <div className="border-t border-gray-400 mb-3" />
 
-              <p className="text-gray-700 text-sm leading-6 mb-3 text-justify" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>
+              <p className="text-gray-700 text-sm leading-6 mb-3 text-justify" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
                 {product.description}
               </p>
 
               <div className="border-t border-gray-400 mb-4" />
 
               <div className="mb-4">
-                <h2 className="text-gray-900 font-medium text-[10px] tracking-widest text-center mb-2" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>
+                <h2 className="text-gray-900 font-medium text-[10px] tracking-widest text-center mb-2" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
                   PRODUCT DETAILS
                 </h2>
 
                 <div className="space-y-2 text-left max-w-sm mx-auto">
                   <div className="flex gap-2">
-                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>Category</span>
+                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>Category</span>
                     <span className="text-gray-700 text-sm">:</span>
-                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>{product.category}</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>{product.category}</span>
                   </div>
 
                   <div className="flex gap-2">
-                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>Color</span>
-                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>:</span>
-                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>{product.color}</span>
+                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>Color</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>:</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>{product.color}</span>
                   </div>
 
                   <div className="flex gap-2">
-                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}>Size</span>
+                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>Size</span>
                     <span className="text-gray-700 text-sm">:</span>
-                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro"'}}>{product.size}</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}>{product.size}</span>
                   </div>
                 </div>
               </div>
@@ -341,7 +341,7 @@ export default function ProductDetailPage() {
           {/* You May Also Like */}
           {product.recomended_products && product.recomended_products.length > 0 && (
             <div>
-              <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-8" style={{ fontFamily: '"Din Pro", "Din_Pro"' }}>
+              <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-8" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
                 You may also like
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -366,13 +366,13 @@ export default function ProductDetailPage() {
                     <div className="text-center">
                       <h3
                         className="text-gray-900 text-sm md:text-base"
-                        style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 500 }}
+                        style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 500 }}
                       >
                         {relatedProduct.name}
                       </h3>
                       <p
                         className="text-gray-600 text-xs md:text-sm"
-                        style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                        style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                       >
                         {relatedProduct.brand}
                       </p>

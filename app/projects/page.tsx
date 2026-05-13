@@ -132,7 +132,7 @@ export default function ProjectsPage() {
                       Our Project
                     </h1>
                     <p className="text-gray-700 text-sm md:text-base 2xl:text-lg leading-relaxed max-w-4xl">
-                      <span className="block"                 style={{ fontFamily: '"Din Pro", "Din_Pro"'}}>
+                      <span className="block"                 style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}>
                         Homelogy Style furniture is featured in a range of residential environments where
                         design and lifestyle come together. Each project highlights the presence of carefully
                         designed furniture pieces that shape the atmosphere of a space.
@@ -205,13 +205,13 @@ export default function ProjectsPage() {
                           <div className="space-y-1">
                             <h3
                               className="text-gray-900 text-base md:text-lg 2xl:text-xl"
-                              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                             >
                               {project.name}
                             </h3>
                             <p
                               className="text-gray-600 text-sm 2xl:text-base"
-                              style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                             >
                               {project.architect}
                             </p>

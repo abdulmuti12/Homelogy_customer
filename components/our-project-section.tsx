@@ -114,11 +114,11 @@ export function OurProjectSection() {
         >
           <h2
             className="text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
-            style={{ marginTop: "1cm", fontFamily: "\"Adobe Garamond Pro\", Garamond", fontWeight: 400 }}
+            style={{ marginTop: "3cm", fontFamily: "\"Adobe Garamond Pro\", Garamond", fontWeight: 400 }}
           >
             Our Project
           </h2>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify" style={{ fontFamily: "\"Din Pro\", \"Din_Pro\"", fontWeight: 400 }}>
+          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
             <span className="block">
               Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
             {/* </span>
@@ -221,7 +221,7 @@ export function OurProjectSection() {
           <Link
             href="/projects"
             className="group inline-flex items-center gap-2 text-amber-700 text-xs md:text-sm tracking-wider uppercase hover:text-amber-800 transition-colors"
-            style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+            style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
           >
             LOAD MORE
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-700/30 transition-all group-hover:border-amber-700/50 group-hover:translate-x-1">

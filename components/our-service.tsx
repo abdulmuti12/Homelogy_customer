@@ -36,7 +36,7 @@ export function OurService() {
           {/* Title */}
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl text-white text-center text-balance"
-            style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+            style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -57,7 +57,7 @@ export function OurService() {
               <motion.div
                 key={index}
                 className="flex items-center justify-center p-6 md:p-8 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/15 transition-all duration-300"
-                style={{ fontFamily: '"Din Pro", "Din_Pro"' }}
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 * index }}

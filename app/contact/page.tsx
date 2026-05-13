@@ -46,7 +46,7 @@ export default function ContactPage() {
         style={{
           scrollPaddingTop: "0",
           scrollBehavior: "smooth",
-          fontFamily: '"Din Pro", "Din_Pro"',
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
           fontWeight: 400,
         }}
       >
@@ -91,7 +91,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label htmlFor="nama" className="text-amber-800 text-sm tracking-wide block"
                         style={{
-          fontFamily: '"Din Pro", "Din_Pro"',
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
         }}
                       >
                         Nama
@@ -110,7 +110,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-amber-800 text-sm tracking-wide block"
                                style={{
-          fontFamily: '"Din Pro", "Din_Pro"',
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
         }}
                       >
                         Email*
@@ -129,7 +129,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label htmlFor="phone" className="text-amber-800 text-sm tracking-wide block"
                                style={{
-          fontFamily: '"Din Pro", "Din_Pro"',
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
         }}
                       >
                         Phone*
@@ -148,7 +148,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-amber-800 text-sm tracking-wide block"
                                style={{
-          fontFamily: '"Din Pro", "Din_Pro"',
+          fontFamily: '"Din Pro", "Din_Pro", sans-serif',
         }}
                       >
                         Message

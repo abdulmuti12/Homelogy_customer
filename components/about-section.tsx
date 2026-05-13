@@ -49,19 +49,28 @@ export function AboutSection() {
             </motion.h2>
 
             <motion.div className="space-y-4" variants={itemVariants}>
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
+              <p
+                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              >
                 Homelogy Style is a furniture brand defined by refined design and material excellence. Each
                 collection is developed with a focus on proportion, form, and craftsmanship, creating pieces
                 that bring presence and elegance into contemporary interiors.
               </p>
 
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
+              <p
+                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              >
                 Rooted in a design philosophy that values detail and material expression, Homelogy Style
                 presents furniture that complements sophisticated living environments. Every piece reflects
                 a commitment to quality, thoughtful design, and enduring aesthetics.
               </p>
 
-              <p className="text-[#5A5A5A] text-sm sm:text-base md:text-lg leading-relaxed text-justify font-['Din_Pro'] font-normal">
+              <p
+                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
+                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              >
                 Through its collections, Homelogy Style offers furniture that shapes spaces with character,
                 refinement, and a distinctive design identity.
               </p>
@@ -69,7 +78,8 @@ export function AboutSection() {
 
             <motion.a
               href="/about"
-              className="inline-block text-[#2C2C2C] font-['Din_Pro'] font-bold text-base md:text-lg hover:text-[#A66B4F] transition-colors"
+              className="inline-block text-[#2C2C2C] font-bold text-base md:text-lg hover:text-[#A66B4F] transition-colors"
+              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
               variants={itemVariants}
             >
               Learn More {">>"}

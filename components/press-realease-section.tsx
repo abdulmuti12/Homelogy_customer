@@ -137,7 +137,7 @@ export function PressReleaseSection() {
                       <span className="inline-block px-3 py-1 text-[10px] sm:text-xs font-light tracking-widest text-amber-400 border border-amber-400/30 rounded-full truncate max-w-[50%]">
                         {release.type || "Press Release"}
                       </span>
-                      <span className="text-xs sm:text-sm font-light text-gray-400" style={{ fontFamily: '"Din Pro", "Din_Pro"' }}>
+                      <span className="text-xs sm:text-sm font-light text-gray-400" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
                         {formatDate(release.press_release_date, release.created_at)}
                       </span>
                     </div>
@@ -151,7 +151,7 @@ export function PressReleaseSection() {
 
                     <p
                       className="text-xs sm:text-sm leading-relaxed text-gray-300 mb-5 flex-grow"
-                      style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
                     >
                       {truncateText(release.description, 100)}
                     </p>
@@ -160,7 +160,7 @@ export function PressReleaseSection() {
                       href={`/press/${release.id}`}
                       className="flex items-center gap-2 text-white hover:text-amber-400 transition-colors duration-300 cursor-pointer mt-auto w-max"
                     >
-                      <span className="text-xs sm:text-sm font-light tracking-wider" style={{ fontFamily: '"Din Pro", "Din_Pro"' }}
+                      <span className="text-xs sm:text-sm font-light tracking-wider" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
 >READ MORE</span>
                       <ChevronRight className="w-4 h-4 stroke-[1.5] group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
@@ -186,7 +186,7 @@ export function PressReleaseSection() {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white group-hover:border-amber-400 transition-colors duration-300">
                   <ChevronRight className="w-5 h-5 stroke-[1.5] group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
-                <span className="font-normal tracking-wider text-sm uppercase" style={{ fontFamily: '"Din Pro", "Din_Pro"', fontWeight: 400 }}
+                <span className="font-normal tracking-wider text-sm uppercase" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
 >
                   View All Press Releases
                 </span>
