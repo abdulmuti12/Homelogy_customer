@@ -20,10 +20,10 @@ export function FooterSection() {
   ]
 
   const socialLinks = [
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/homelogystyle/", label: "Instagram" },
     { icon: MessageCircle, href: "#", label: "WhatsApp" },
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Facebook, href: "https://www.facebook.com/homelogystyle/", label: "Facebook" },
+    { icon: Linkedin, href: "https://www.linkedin.com/showcase/homelogy-style/", label: "LinkedIn" },
   ]
 
   const footerSlides = [
