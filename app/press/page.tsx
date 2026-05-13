@@ -118,13 +118,13 @@ export default function PressPage() {
                 className="group inline-flex items-center gap-2 text-white hover:text-amber-400 transition-colors duration-300 mb-8"
               >
                 <ChevronLeft className="w-4 h-4 stroke-[1.5] group-hover:-translate-x-1 transition-transform duration-300" />
-                <span className="text-sm font-light tracking-wider">BACK HOME</span>
+                <span className="text-sm font-light tracking-wider" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>BACK HOME</span>
               </Link>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-white mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-white mb-6" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
                 Press Releases
               </h1>
-              <p className="text-base md:text-lg font-light text-gray-300 max-w-2xl">
+              <p className="text-base md:text-lg font-light text-gray-300 max-w-2xl" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
                 Stay informed with the latest news, announcements, and milestones from Homelogy.
               </p>
             </div>
@@ -191,12 +191,12 @@ export default function PressPage() {
                           </div>
 
                           {/* name - Line Clamp 2 */}
-                          <h3 className="text-base sm:text-lg font-normal leading-snug text-white mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2">
+                          <h3 className="text-base sm:text-lg font-normal leading-snug text-white mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
                             {release.name}
                           </h3>
 
                           {/* description - Line Clamp 3 */}
-                          <p className="text-xs sm:text-sm font-light leading-relaxed text-gray-300 mb-5 flex-grow line-clamp-3">
+                          <p className="text-xs sm:text-sm font-light leading-relaxed text-gray-300 mb-5 flex-grow line-clamp-3" style={{ fontFamily: '"Din Pro", "Din_Pro"' }}>
                             {stripHtml(release.description)}
                           </p>
 
