@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     "Discover premium furniture with living philosophy. Explore our exclusive collections of modern and elegant home furnishings.",
   generator: "v0.app",
   icons: {
-    icon: "/homelogy_fav.png",
-    shortcut: "/homelogy_fav.png",
-    apple: "/apple-icon.png",
+    icon: "/homelogy_fav.ico",
+    shortcut: "/homelogy_fav.ico",
+    apple: "/homelogy_fav.ico",
   },
 }
 
