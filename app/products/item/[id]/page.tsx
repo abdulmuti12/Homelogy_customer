@@ -24,6 +24,8 @@ interface ProductData {
   description: string
   size: string
   color: string
+  sku_product: string | null
+  mades: Array<string | { name?: string; value?: string; material?: string }> | null
   image1: string
   image2: string
   image3: string
@@ -153,6 +155,15 @@ export default function ProductDetailPage() {
   }
 
   const mainImage = images[selectedImageIndex] || "/placeholder.svg"
+  const madesDisplay = product.mades?.length
+    ? product.mades
+        .map((made) => {
+          if (typeof made === "string") return made
+          return made.name || made.value || made.material || ""
+        })
+        .filter((value) => value.trim() !== "")
+        .join(", ")
+    : "-"
 
   return (
     <main
@@ -273,6 +284,22 @@ export default function ProductDetailPage() {
                     <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>Category</span>
                     <span className="text-gray-700 text-sm">:</span>
                     <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>{product.category}</span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>SKU</span>
+                    <span className="text-gray-700 text-sm">:</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
+                      {product.sku_product || "-"}
+                    </span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <span className="text-gray-700 text-sm min-w-[65px]" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>Materials</span>
+                    <span className="text-gray-700 text-sm">:</span>
+                    <span className="text-gray-700 text-sm" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
+                      {madesDisplay || "-"}
+                    </span>
                   </div>
 
                   <div className="flex gap-2">
