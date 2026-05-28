@@ -39,7 +39,7 @@ export function FooterSection() {
     <footer className="w-full">
       {/* Video Carousel Section */}
       <section className="relative w-full h-96 bg-black overflow-hidden"  style={{
-                fontFamily: '"Adobe Garamond Pro", Garamond',
+                       fontFamily: '"Din Pro", "Din_Pro", sans-serif',
                 // fontWeight: 400,
                 fontStyle: "normal",
               }}>
@@ -70,7 +70,7 @@ export function FooterSection() {
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all" />
 
             <div className="relative h-full flex flex-col items-center justify-center text-white gap-8" style={{
-                fontFamily: '"Adobe Garamond Pro", Garamond',
+                       fontFamily: '"Din Pro", "Din_Pro", sans-serif',
                 // fontWeight: 400,
                 fontStyle: "normal",
               }}>
@@ -108,7 +108,7 @@ export function FooterSection() {
 
           {/* Right Slide - Address and Navigation Links */}
           <div className="w-1/2 flex items-center px-12 py-8 gap-16"  style={{
-                fontFamily: '"Adobe Garamond Pro", Garamond',
+                       fontFamily: '"Din Pro", "Din_Pro", sans-serif',
                 fontWeight: 400,
                 fontStyle: "normal",
               }}>
@@ -151,7 +151,7 @@ export function FooterSection() {
           backgroundImage: "url(/images/xdf.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          fontFamily: '"Adobe Garamond Pro", Garamond',
+                 fontFamily: '"Din Pro", "Din_Pro", sans-serif',
           fontWeight: 400,
           fontStyle: "normal",
 
