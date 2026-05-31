@@ -48,29 +48,24 @@ export function AboutSection() {
               About us
             </motion.h2>
 
-            <motion.div className="space-y-4" variants={itemVariants}>
-              <p
-                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din_Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
-              >
+            <motion.div
+              className="space-y-4"
+              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
+              variants={itemVariants}
+            >
+              <p className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify">
                 Homelogy Style is a furniture brand defined by refined design and material excellence. Each
                 collection is developed with a focus on proportion, form, and craftsmanship, creating pieces
                 that bring presence and elegance into contemporary interiors.
               </p>
 
-              <p
-                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}
-              >
+              <p className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify">
                 Rooted in a design philosophy that values detail and material expression, Homelogy Style
                 presents furniture that complements sophisticated living environments. Every piece reflects
                 a commitment to quality, thoughtful design, and enduring aesthetics.
               </p>
 
-              <p
-                className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify"
-                style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif'}}
-              >
+              <p className="text-[#5A5A5A] text-base md:text-lg leading-relaxed text-justify">
                 Through its collections, Homelogy Style offers furniture that shapes spaces with character,
                 refinement, and a distinctive design identity.
               </p>

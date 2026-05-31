@@ -12,8 +12,8 @@ export function WhoWeAre() {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full h-full flex items-center px-4 md:pt-0 py-12 md:py-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center w-full max-w-6xl mx-auto">
+      <div className="w-full h-full flex items-center px-4 md:px-4 pt-16 md:pt-0 pb-6 md:pb-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center w-full max-w-6xl mx-auto">
           {/* Right side - Image (mobile: first, desktop: right) */}
           <motion.div
             className="flex justify-center md:justify-end order-first md:order-last"
@@ -22,20 +22,20 @@ export function WhoWeAre() {
             transition={{ duration: 0.7 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <img src="/Image-Who-We-Us.jpg" alt="Who We Are team" className="w-full max-w-md rounded-lg object-cover" />
+            <img src="/Image-Who-We-Us.jpg" alt="Who We Are team" className="w-full max-w-xs md:max-w-md rounded-lg object-cover object-center" />
           </motion.div>
 
           {/* Left side - Text content (mobile: below, desktop: left) */}
           <motion.div
-            className="space-y-6 ml-0 md:ml-8 lg:ml-12 order-last md:order-first"
+            className="space-y-4 md:space-y-6 ml-0 md:ml-8 lg:ml-12 order-last md:order-first"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h2
-              className="text-4xl md:text-5xl text-amber-900"
-              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              className="text-3xl md:text-5xl text-amber-900"
+              style={{ fontFamily: ‘"Din Pro", "Din_Pro", sans-serif’, fontWeight: 400 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -45,8 +45,8 @@ export function WhoWeAre() {
             </motion.h2>
 
             <motion.div
-              className="space-y-4 text-gray-700 text-base md:text-lg leading-relaxed"
-              style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+              className="space-y-3 md:space-y-4 text-gray-700 text-sm md:text-lg leading-relaxed"
+              style={{ fontFamily: ‘"Din Pro", "Din_Pro", sans-serif’, fontWeight: 400 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
@@ -54,15 +54,15 @@ export function WhoWeAre() {
             >
               <p>
                 Homelogy Style is defined by the vision of Claudia Apriliana, Creative Director, and Ayleen Apriliani, Managing Director.
-                Claudia Apriliana shapes the creative direction of the brand, expressing a design language centered on 
+                Claudia Apriliana shapes the creative direction of the brand, expressing a design language centered on
                 refined forms, balanced proportions, and a deep sensitivity to materials.
               </p>
 
               <p>
-                Ayleen Apriliani oversees the strategic development of Homelogy Style, guiding the brand’s growth, partnerships, and operations 
+                Ayleen Apriliani oversees the strategic development of Homelogy Style, guiding the brand’s growth, partnerships, and operations
                 with clarity and precision.
-                
-                Together, they shape Homelogy Style through a shared commitment to craftsmanship, design integrity, and a cultivated perspective 
+
+                Together, they shape Homelogy Style through a shared commitment to craftsmanship, design integrity, and a cultivated perspective
                 on contemporary living.
               </p>
             </motion.div>

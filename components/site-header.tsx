@@ -14,7 +14,6 @@ export function SiteHeader() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/40 via-black/20 to-transparent backdrop-blur-sm">
       <div className="w-full px-4 md:px-6 lg:px-8 py-4 md:py-6">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
-          {/* Left: Mobile Menu - Moved closer to left edge */}
           <div className="flex justify-start">
             <Button
               variant="ghost"
@@ -23,14 +22,13 @@ export function SiteHeader() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="h-16 md:h-20 w-16 md:w-20" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-16 md:h-20 w-16 md:w-20" />
+                <Menu className="h-6 w-6" />
               )}
             </Button>
           </div>
 
-          {/* Center: Logo */}
           <Link href="/" className="flex justify-center hover:opacity-80 transition-opacity">
             <Image
               src="/images/logo-homeology.png"
@@ -42,10 +40,9 @@ export function SiteHeader() {
             />
           </Link>
 
-          {/* Right: Icons - Moved closer to right edge and reduced gap */}
-          <div className="flex items-center justify-end gap-1 -mr-2">
+          <div className="flex items-center justify-end gap-2">
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
-              <ShoppingCart className="h-16 md:h-20 w-16 md:w-20" />
+              <ShoppingCart className="h-5 w-5" />
             </Button>
             <div className="relative">
               <Button
@@ -54,7 +51,7 @@ export function SiteHeader() {
                 className="text-white hover:bg-white/20"
                 onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
               >
-                <User className="h-16 md:h-20 w-16 md:w-20" />
+                <User className="h-5 w-5" />
               </Button>
               {isUserDropdownOpen && (
                 <>
@@ -84,10 +81,8 @@ export function SiteHeader() {
 
       {isMenuOpen && (
         <>
-          {/* Transparent backdrop for closing menu */}
           <div className="fixed inset-0 z-30" onClick={() => setIsMenuOpen(false)} />
 
-          {/* Compact dropdown menu */}
           <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm z-40 shadow-lg">
             <nav className="flex flex-col px-8 py-6">
               <Link

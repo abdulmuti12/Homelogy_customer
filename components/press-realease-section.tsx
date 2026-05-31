@@ -91,22 +91,24 @@ export function PressReleaseSection() {
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                // fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond'
+                fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond',
               }}
-              
             >
-              <p className="text-lg md:text-xl font-light tracking-wider text-white" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
+              <p className="text-lg md:text-xl font-light tracking-wider text-white">
                 Press Center
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-white" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-white">
                 Latest News & Press Releases
               </h2>
-              <p className="text-base md:text-lg font-light text-gray-300 max-w-2xl pt-2" style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}>
+              <p className="text-base md:text-lg font-light text-gray-300 max-w-2xl pt-2">
                 Stay updated with the latest announcements, product launches, and milestones from Homelogy.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+              style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}
+            >
               {pressReleases.map((release, index) => (
                 <div
                   key={release.id}
@@ -143,7 +145,7 @@ export function PressReleaseSection() {
                     </div>
 
                     <h3
-                      className="text-base sm:text-lg font-normal leading-snug text-white mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2 " style={{ fontFamily: '"GaramondPro-Bold", "Adobe Garamond Pro", Garamond' }}
+                      className="text-base sm:text-lg font-normal leading-snug text-white mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2"
                       title={release.name}
                     >
                       {release.name}
@@ -151,7 +153,7 @@ export function PressReleaseSection() {
 
                     <p
                       className="text-xs sm:text-sm leading-relaxed text-gray-300 mb-5 flex-grow"
-                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
+                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
                     >
                       {truncateText(release.description, 100)}
                     </p>
@@ -159,9 +161,9 @@ export function PressReleaseSection() {
                     <Link
                       href={`/press/${release.id}`}
                       className="flex items-center gap-2 text-white hover:text-amber-400 transition-colors duration-300 cursor-pointer mt-auto w-max"
+                      style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
                     >
-                      <span className="text-xs sm:text-sm font-light tracking-wider" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}
->READ MORE</span>
+                      READ MORE
                       <ChevronRight className="w-4 h-4 stroke-[1.5] group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                   </div>
@@ -177,6 +179,7 @@ export function PressReleaseSection() {
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(20px)",
                 transitionDelay: "500ms",
+                fontFamily: '"Din Pro", "Din_Pro", sans-serif',
               }}
             >
               <Link
@@ -186,8 +189,7 @@ export function PressReleaseSection() {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white group-hover:border-amber-400 transition-colors duration-300">
                   <ChevronRight className="w-5 h-5 stroke-[1.5] group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
-                <span className="font-normal tracking-wider text-sm uppercase" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}
->
+                <span className="font-normal tracking-wider text-sm uppercase">
                   View All Press Releases
                 </span>
               </Link>

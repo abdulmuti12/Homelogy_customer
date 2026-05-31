@@ -10,20 +10,6 @@ const sectionFade = {
   visible: { opacity: 1, transition: { duration: 0.6 } },
 }
 
-const contentReveal = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-}
-
-const gridReveal = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
 const cardReveal = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -37,11 +23,9 @@ type Project = {
 }
 
 const API_URL = "https://homelogystyle.com/api/customers/project/list"
-const IMAGE_ORIGIN = "https://homelogystyle.com"
 
 export function OurProjectSection() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [enlargedProject, setEnlargedProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -64,7 +48,6 @@ export function OurProjectSection() {
         const loadedProjects: Project[] = payload.data
         if (!cancelled) {
           setProjects(loadedProjects)
-          setSelectedProject(loadedProjects[0] ?? null)
         }
       } catch (err) {
         if (!cancelled) {
@@ -108,29 +91,27 @@ export function OurProjectSection() {
       >
         {/* Title and Description */}
         <motion.div
-          className="mb-12 max-w-3xl"
-          variants={contentReveal}
-          viewport={{ once: true, amount: 0.2 }}
+          className="mb-12 max-w-3xl mt-[3cm]"
+          variants={sectionFade}
         >
           <h2
             className="text-3xl md:text-4xl lg:text-5xl text-amber-900 mb-6"
-            style={{ marginTop: "3cm", fontFamily: "\"Adobe Garamond Pro\", Garamond", fontWeight: 400 }}
+            style={{ fontFamily: '"Adobe Garamond Pro", Garamond' }}
           >
             Our Project
           </h2>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
+          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
             <span className="block">
               Homelogy Style furniture is featured in a range of residential environments where design and lifestyle come together.
-            {/* </span>
-            <span className="block"> */}
+            </span>
+            <span className="block">
               Each project highlights the presence of carefully designed furniture pieces that shape the atmosphere of a space.
             </span>
-                        <br />
-
+            <br />
             <span className="block">
               Through thoughtful placement, refined materials, and elegant forms, Homelogy Style contributes to interiors that express sophistication and contemporary living.
-            {/* </span>
-            <span className="block"> */}
+            </span>
+            <span className="block">
               Our projects reflect the versatility of the collection and the ability of each piece to integrate seamlessly within curated interiors.
             </span>
           </p>
@@ -153,7 +134,7 @@ export function OurProjectSection() {
               className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
               initial="hidden"
               whileInView="visible"
-              variants={gridReveal}
+              variants={cardReveal}
               viewport={{ once: true, amount: 0.2 }}
             >
               {projects.map((project, index) => {
@@ -161,10 +142,7 @@ export function OurProjectSection() {
                 return (
                   <motion.button
                     key={`${project.file}-${index}`}
-                    onClick={() => {
-                      setSelectedProject(project)
-                      setEnlargedProject(project)
-                    }}
+                    onClick={() => setEnlargedProject(project)}
                     className="group cursor-pointer"
                     variants={cardReveal}
                   >
@@ -192,25 +170,7 @@ export function OurProjectSection() {
           )}
         </div>
 
-        {/* {selectedProject && (
-          <motion.div
-            className="mt-8 rounded-sm bg-white/90 p-4 text-sm text-gray-700 shadow-sm"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <p className="font-semibold text-amber-900">{selectedProject.name}</p>
-            {selectedProject.designer ? (
-              <p className="mt-1 text-xs">Designer: {selectedProject.designer}</p>
-            ) : null}
-            {selectedProject.project_time ? (
-              <p className="mt-1 text-xs text-gray-600">{selectedProject.project_time}</p>
-            ) : null}
-          </motion.div>
-        )} */}
-
-        {/* Featured Project Title and Load More */}
+        {/* Load More */}
         <motion.div
           className="flex justify-end mt-8 md:mt-12"
           initial={{ opacity: 0, y: 20 }}
