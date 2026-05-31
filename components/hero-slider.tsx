@@ -22,7 +22,6 @@ export function HeroSlider() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Fetch slides from API
   useEffect(() => {
     const fetchSlides = async () => {
       try {
@@ -104,21 +103,16 @@ export function HeroSlider() {
     )
   }
 
-  const activeSlide = slides[currentSlide]
-  const nextIndex = (currentSlide + 1) % slides.length
-
   return (
     <div
       className="relative h-screen w-full overflow-hidden"
-      data-scroll-section
       onMouseEnter={pauseTimer}
       onMouseLeave={resumeTimer}
     >
-      {/* ═══ ACTIVE SLIDE IMAGE ONLY (prevents 4× image load) ═══ */}
       <div className="absolute inset-0">
         <Image
-          src={activeSlide.image || "/placeholder.svg"}
-          alt={activeSlide.title || `Home slide ${currentSlide + 1}`}
+          src={slides[currentSlide].image || "/placeholder.svg"}
+          alt={slides[currentSlide].title || `Home slide ${currentSlide + 1}`}
           fill
           priority
           sizes="100vw"
@@ -129,17 +123,16 @@ export function HeroSlider() {
         <div className="absolute inset-0 bg-black/20" />
       </div>
 
-      {/* ═══ CONTENT ═══ */}
       <div className="relative z-10 flex h-full items-center justify-center">
         <div className="text-center px-4">
-          {activeSlide.tag && (
+          {slides[currentSlide].tag && (
             <p className="text-white/90 text-sm md:text-base mb-4 tracking-wider">
-              {activeSlide.tag}
+              {slides[currentSlide].tag}
             </p>
           )}
           <h1
             className={`font-light text-white mb-2 tracking-tight ${
-              activeSlide.title === "Furniture with Living Philosophy"
+              slides[currentSlide].title === "Furniture with Living Philosophy"
                 ? "text-3xl md:text-5xl lg:text-6xl"
                 : "text-4xl md:text-6xl lg:text-7xl"
             }`}
@@ -151,36 +144,22 @@ export function HeroSlider() {
                 fontStyle: "normal",
               }}
             >
-              {activeSlide.title}
+              {slides[currentSlide].title}
             </span>{" "}
-            {activeSlide.subtitle}
+            {slides[currentSlide].subtitle}
           </h1>
           <p className="text-white/80 text-base md:text-lg mt-6 max-w-2xl mx-auto leading-relaxed">
-            {activeSlide.description}
+            {slides[currentSlide].description}
           </p>
         </div>
       </div>
 
-      {/* ═══ PRELOAD NEXT SLIDE (hidden, loads in background) ═══ */}
-      <div className="hidden" aria-hidden="true">
-        <Image
-          src={slides[nextIndex].image}
-          alt=""
-          fill
-          sizes="0px"
-          quality={60}
-          priority={false}
-        />
-      </div>
-
-      {/* Scroll Indicator */}
       <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-20">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
           <div className="w-1.5 h-1.5 bg-white/70 rounded-full" />
         </div>
       </div>
 
-      {/* Navigation Arrows */}
       <Button
         variant="ghost"
         size="icon"
@@ -198,7 +177,6 @@ export function HeroSlider() {
         <ChevronRight className="h-10 w-10 md:h-12 md:w-12" />
       </Button>
 
-      {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {slides.map((_, index) => (
           <button

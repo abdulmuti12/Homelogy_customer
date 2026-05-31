@@ -4,9 +4,12 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // Enable built-in image optimization (WebP/AVIF, resize, lazy load)
-    // Only disable for external image CDN that doesn't support Next.js format
-    // unoptimized: true, // REMOVED - enables next/image optimization
+    minimumCacheTTL: 86400,
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Bypass optimization proxy untuk external CDN yang unreliable
+    // Reduces server load — images served directly from source
     remotePatterns: [
       {
         protocol: "https",
