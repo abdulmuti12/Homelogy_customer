@@ -15,9 +15,9 @@ export function FooterSection() {
   return (
     <footer className="w-full">
       {/* Showroom + Map Section */}
-      <section className="relative w-full md:h-96 bg-black overflow-hidden" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
-        <div className="flex flex-col md:flex-row h-full">
-          <div className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto relative group overflow-hidden">
+      <section className="relative w-full h-96 bg-black overflow-hidden" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
+        <div className="flex h-full flex-col md:flex-row">
+          <div className="w-full md:w-1/2 h-48 md:h-full relative group overflow-hidden">
             <Image
               src="/images/footer-showroom-hm.jpg"
               alt="Homelogy Showroom"
@@ -29,7 +29,7 @@ export function FooterSection() {
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all" />
           </div>
 
-          <div className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto relative group overflow-hidden">
+          <div className="w-full md:w-1/2 h-48 md:h-full relative group overflow-hidden">
             <Image
               src="/images/screenshot-202025-12-23-20at-2017.png"
               alt="Homelogy Location Map"
@@ -46,7 +46,7 @@ export function FooterSection() {
                 href="https://www.google.com/maps/place/Jakarta+Design+Center/@-6.2017185,106.7982548,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69f6bc1715d631:0xac5785593356cd5d!8m2!3d-6.2017185!4d106.8008297!16s%2Fg%2F1trs_9wl?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-white px-6 py-1.5 md:px-8 md:py-2 text-xs md:text-sm hover:bg-white hover:text-black transition-all duration-300"
+                className="border-2 border-white px-4 py-1.5 md:px-8 md:py-2 text-xs md:text-sm hover:bg-white hover:text-black transition-all duration-300"
               >
                 Our Location
               </a>
@@ -57,11 +57,11 @@ export function FooterSection() {
 
       {/* Content Section */}
       <section
-        className="relative w-full overflow-hidden py-8 md:py-0"
+        className="relative w-full h-64 overflow-hidden"
         style={{ backgroundImage: "url(/images/xdf.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
-        <div className="flex flex-col md:flex-row h-full relative z-10">
-          <div className="flex items-center justify-center md:justify-start p-6 md:p-8">
+        <div className="flex h-full relative z-10 flex-col md:flex-row">
+          <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start p-4 md:p-8">
             <Image
               src="/images/logo-hm-cokelat.png"
               alt="Homelogy"
@@ -72,8 +72,8 @@ export function FooterSection() {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row px-6 md:px-12 pb-6 md:pb-8 gap-6 md:gap-16" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
-            <div className="space-y-2 flex-shrink-0">
+          <div className="w-full md:w-1/2 flex flex-col md:flex-row items-start md:items-center px-6 md:px-12 pb-6 md:pb-0 pt-2 md:pt-0 gap-4 md:gap-16" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif' }}>
+            <div className="space-y-1.5 md:space-y-3 flex-shrink-0">
               <p className="text-xs md:text-sm text-gray-800 font-medium leading-relaxed">
                 JAKARTA DESIGN CENTER 3RD FLOOR,
                 <br />
@@ -89,7 +89,7 @@ export function FooterSection() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 md:gap-8 md:ml-auto">
+            <div className="grid grid-cols-2 gap-4 md:gap-8 md:ml-auto flex-shrink-0">
               <div className="space-y-1.5 md:space-y-2">
                 <a href="#" className="text-xs md:text-sm text-gray-800 hover:text-amber-600 transition-colors block">Products</a>
                 <a href="#" className="text-xs md:text-sm text-gray-800 hover:text-amber-600 transition-colors block">Legacy</a>
