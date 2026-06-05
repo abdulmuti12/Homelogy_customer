@@ -123,7 +123,7 @@ export default function PromotionsPage() {
 
         {/* Title */}
         <div className="mb-4">
-          <h1 className="font-light text-5xl md:text-6xl text-amber-900 font-serif mb-6">Our Promotion</h1>
+          <h1 className="font-light text-5xl md:text-6xl text-amber-900 font-serif mb-6">Our<br />Promotion</h1>
         </div>
       </section>
 
