@@ -1,6 +1,13 @@
 'use client'
 
 import { ChevronRight } from "lucide-react"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
@@ -90,36 +97,40 @@ export default function PromotionsPage() {
   const descriptionText = promotionData?.description 
 
   return (
-    <main ref={pageRef} className="min-h-screen w-full bg-black">
+    <main ref={pageRef} className="min-h-screen w-full" style={{ backgroundImage: "url(/xdf.jpg)", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
       <SiteHeader />
 
       {/* Header Section with Title */}
-      {/* PERUBAHAN PENTING: Menambahkan z-10 agar teks berada di atas gambar yang ditarik ke atas */}
-      <section className="relative z-10 -mt-10 pt-24 pb-2 px-6 lg:px-16 xl:px-24 pointer-events-none">
-        {/* Breadcrumb - Tambahkan pointer-events-auto agar link tetap bisa diklik */}
-        <div className="mb-8 pointer-events-auto inline-block" style={{ marginTop: '0.5cm' }}>
-          <div className="flex items-center gap-2 text-sm font-light font-['Aeonik',sans-serif]">
-            <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-              Home
-            </Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-white">Promotion</span>
-          </div>
+      <section className="relative z-10 -mt-10 pt-[134px] pb-2 px-6 lg:px-16 xl:px-24 pointer-events-none">
+        {/* Breadcrumb - matched products/page.tsx */}
+        <div className="mb-8">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/promotion">Promotion</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
         </div>
 
         {/* Title */}
         <div className="mb-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-none font-['Aeonik',sans-serif]">
-            <span className="block">Our</span>
-            <span className="block ml-8 md:ml-16 lg:ml-24 mix-blend-difference">Promotion</span>
-          </h1>
+          <h1 className="font-light text-5xl md:text-6xl text-amber-900 font-serif mb-6">Our Promotion</h1>
         </div>
       </section>
 
       {/* Promotional Banner */}
    {/* Promotional Banner */}
 <section className="relative w-full -mt-12">
-  <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden bg-black">
+  <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
     {/* Komponen Image hanya akan di-render jika imageUrl tidak null */}
     {imageUrl && (
       <Image
@@ -137,11 +148,11 @@ export default function PromotionsPage() {
       {/* Description Section */}
       <section
         // PERUBAHAN: Mengganti py-16... menjadi pt-10 (sekitar 1cm) dan memisahkan pb (padding-bottom)
-        className="relative bg-black -mt-16 pt-10 pb-16 md:pt-12 md:pb-20 lg:pt-12 lg:pb-24 px-6 lg:px-16 xl:px-24"
+        className="relative -mt-16 pt-10 pb-16 md:pt-12 md:pb-20 lg:pt-12 lg:pb-24 px-6 lg:px-16 xl:px-24"
         style={getRevealStyle(isVisible, "200ms")}
       >
         <div className="max-w-4xl">
-          <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed font-['Aeonik',sans-serif]">
+          <p className="text-sm md:text-base font-light text-gray-700 leading-relaxed" style={{ fontFamily: '"Din Pro", "Din_Pro", sans-serif', fontWeight: 400 }}>
             {descriptionText}
           </p>
         </div>
@@ -149,7 +160,7 @@ export default function PromotionsPage() {
 
       {/* CTA Section */}
       <section
-        className="relative bg-black pb-20 md:pb-24 lg:pb-32 px-6 lg:px-16 xl:px-24"
+        className="relative pb-20 md:pb-24 lg:pb-32 px-6 lg:px-16 xl:px-24"
         style={getRevealStyle(isVisible, "400ms")}
       >
         <div className="flex justify-center">
@@ -157,17 +168,12 @@ export default function PromotionsPage() {
             href="https://wa.me/6285174189869?text=Our%20Promotion%20Casa%20Italia"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-4 text-white hover:text-amber-400 transition-colors duration-300"
+            className="group inline-flex items-center gap-4 transition-colors duration-300"
           >
-            <span className="font-normal tracking-wider text-base md:text-lg font-['Aeonik',sans-serif]">
+            <span className="font-light text-base md:text-lg font-serif text-amber-900 group-hover:text-amber-400">
               <span className="inline-flex items-center gap-2">
-                <Image
-                  src="/wa-icon.png"
-                  alt="WhatsApp"
-                  width={28}
-                  height={28}
-                  className="w-6 h-6 md:w-7 md:h-7 object-contain"
-                />
+                      <Image src="/images/wa-icon.png" alt="WhatsApp" width={28} height={28} className="object-contain" />
+
                 Get your Special Offers here!
               </span>
             </span>

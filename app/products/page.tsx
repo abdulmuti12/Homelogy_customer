@@ -166,7 +166,7 @@ export default function ProductsPage() {
           setProducts([])
         }
       } catch (err) {
-        console.log("[v0] API Error:", err)
+        // console.log("[v0] API Error:", err)
         setError("Failed to connect to server")
         setProducts([])
       } finally {
@@ -223,7 +223,6 @@ export default function ProductsPage() {
                 <div className="lg:w-1/3">
                   <h1 className="font-light text-5xl md:text-6xl text-amber-900 font-serif mb-6">Product</h1>
                 </div>
-
                 <div className="lg:w-2/3 flex flex-col justify-start">
                   <p
                     className="text-gray-700 text-base md:text-lg leading-relaxed"

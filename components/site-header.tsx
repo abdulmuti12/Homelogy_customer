@@ -115,10 +115,17 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/contact"
-                className="text-white text-lg py-3 hover:text-white/80 transition-colors"
+                className="text-white text-lg py-3 border-b border-white/10 hover:text-white/80 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
+              </Link>
+              <Link
+                href="/promotion"
+                className="text-white text-lg py-3 hover:text-white/80 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Promotion
               </Link>
             </nav>
           </div>
