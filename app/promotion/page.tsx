@@ -90,7 +90,7 @@ export default function PromotionsPage() {
   // Menentukan URL gambar dari API atau menggunakan gambar lokal sebagai fallback
   // Catatan: Pastikan path backend sesuai. Jika menggunakan Laravel public storage, biasanya ditambahkan prefix /storage/ atau /public/
   const imageUrl = promotionData?.file 
-    ? `${process.env.NEXT_PUBLIC_CASAITALIA_STORAGE_URL}/${promotionData.file}` // Ubah '/storage/' sesuai konfigurasi backend jika diperlukan
+    ? `${process.env.NEXT_PUBLIC_API_URL}/${promotionData.file}` // Ubah '/storage/' sesuai konfigurasi backend jika diperlukan
     : null
 
   // Menentukan teks deskripsi dari API atau menggunakan teks lama sebagai fallback
