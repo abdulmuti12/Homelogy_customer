@@ -25,7 +25,7 @@ interface PromotionItem {
 interface PromotionResponse {
   success: boolean;
   message: string;
-  data: PromotionItem[];
+  data: PromotionItem;
   status: number;
 }
 
@@ -53,11 +53,13 @@ export default function PromotionsPage() {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customer-promotion`)
         if (!response.ok) throw new Error("Failed to fetch promotion data")
-        
+
         const result: PromotionResponse = await response.json()
-        
-        if (result.success && result.data && result.data.length > 0) {
-          setPromotionData(result.data[0])
+
+        if (result.success && result.data) {
+          // Backend dapat mengirim data sebagai object tunggal atau array
+          const item = Array.isArray(result.data) ? result.data[0] : result.data
+          if (item) setPromotionData(item)
         }
       } catch (error) {
         console.error("Error fetching data:", error)
@@ -88,13 +90,13 @@ export default function PromotionsPage() {
   }, [])
 
   // Menentukan URL gambar dari API atau menggunakan gambar lokal sebagai fallback
-  // Catatan: Pastikan path backend sesuai. Jika menggunakan Laravel public storage, biasanya ditambahkan prefix /storage/ atau /public/
-  const imageUrl = promotionData?.file 
-    ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/${promotionData.file}` // Ubah '/storage/' sesuai konfigurasi backend jika diperlukan
+  // Catatan: file di API sudah berisi URL lengkap, jadi dipakai apa adanya
+  const imageUrl = promotionData?.file
+    ? promotionData.file
     : null
 
   // Menentukan teks deskripsi dari API atau menggunakan teks lama sebagai fallback
-  const descriptionText = promotionData?.description 
+  const descriptionText = promotionData?.description
 
   return (
     <main ref={pageRef} className="min-h-screen w-full" style={{ backgroundImage: "url(/xdf.jpg)", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
@@ -133,13 +135,12 @@ export default function PromotionsPage() {
   <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
     {/* Komponen Image hanya akan di-render jika imageUrl tidak null */}
     {imageUrl && (
-      <Image
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
         src={imageUrl}
         alt={promotionData?.name || "Luxury Living Room Promotion"}
-        fill
-        className="object-contain"
-        priority
-        unoptimized
+        className="absolute inset-0 w-full h-full object-contain"
+        loading="eager"
       />
     )}
   </div>
