@@ -4,12 +4,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Bypass Next.js image optimizer — serve external images directly from source.
+    // Production server (nginx) blocks /_next/image upstream to itself, causing 504 timeouts.
+    unoptimized: true,
     minimumCacheTTL: 86400,
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Bypass optimization proxy untuk external CDN yang unreliable
-    // Reduces server load — images served directly from source
     remotePatterns: [
       {
         protocol: "https",
